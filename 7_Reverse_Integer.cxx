@@ -1,5 +1,5 @@
 /*
- * 1_Two_Sum.cxx
+ * 7_Reverse_Integer.cxx
  * 
  * Copyright 2020 RedaKerouicha <redakerouicha@localhost>
  * 
@@ -18,38 +18,41 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301, USA.
  * 
+ * https://leetcode.com/problems/reverse-integer/
  * 
- * 
- * https://leetcode.com/problems/two-sum/
  */
+
+    int reverse(int x) 
+    {
+        if (x<=INT_MIN || x>=INT_MAX-1)
+        {    
+            return 0;
+        }
+        long solution=0;
+        int abs=(x<0)?-1:1;
+        long val=x*abs;
+        int power=1; 
+        
+        while(val>0)
+            {
+                solution=solution*10+val%10;
+                val=val/10;
+                power++;                
+            }
+     
+        if(power>=11 && solution>2147483644 )
+            return 0;
+            
+        return solution*abs;
+    }
 
 
 #include <iostream>
- vector<int> twoSum(vector<int>& nums, int target) {
-        unordered_map<int, int> m;
-        int n = nums.size();
-        for(int i=0;i<n;i++)
-            m.insert({nums[i], i});
-        
-        vector<int> ans;
-        
-        for(int i=0;i<n;i++){
-            int check = target - nums[i];
-            if(m.find(check) != m.end()){
-                if(m[check] != i){
-                    ans.push_back(i);
-                    ans.push_back(m[check]);
-                    break;
-                }
-            }
-        }
-        return ans;
-    }
 
 int main(int argc, char **argv)
 {
-	
+
+
 	return 0;
 }
-
 

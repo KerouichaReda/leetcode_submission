@@ -1,5 +1,5 @@
 /*
- * 1_Two_Sum.cxx
+ * 12_Integer_to_Roman.cxx
  * 
  * Copyright 2020 RedaKerouicha <redakerouicha@localhost>
  * 
@@ -18,38 +18,45 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301, USA.
  * 
- * 
- * 
- * https://leetcode.com/problems/two-sum/
+ * https://leetcode.com/problems/integer-to-roman/
  */
-
-
 #include <iostream>
- vector<int> twoSum(vector<int>& nums, int target) {
-        unordered_map<int, int> m;
-        int n = nums.size();
-        for(int i=0;i<n;i++)
-            m.insert({nums[i], i});
-        
-        vector<int> ans;
-        
-        for(int i=0;i<n;i++){
-            int check = target - nums[i];
-            if(m.find(check) != m.end()){
-                if(m[check] != i){
-                    ans.push_back(i);
-                    ans.push_back(m[check]);
-                    break;
-                }
-            }
+
+
+
+class Solution {
+public:
+    string intToRoman(unsigned int  value) 
+    {
+    struct romandata_t { unsigned int value; char const* numeral; };
+    const struct romandata_t romandata[] =
+    {
+        {1000, "M"}, {900, "CM"},
+        {500, "D"}, {400, "CD"},
+        {100, "C"}, { 90, "XC"},
+        { 50, "L"}, { 40, "XL"},
+        { 10, "X"}, { 9, "IX"},
+        { 5, "V"}, { 4, "IV"},
+        { 1, "I"},
+        { 0, NULL} // end marker
+    };
+
+    std::string result;
+    for (const romandata_t* current = romandata; current->value > 0; ++current)
+    {
+        while (value >= current->value)
+        {
+            result += current->numeral;
+            value -= current->value;
         }
-        return ans;
     }
+    return result;
+    }
+};
 
 int main(int argc, char **argv)
 {
 	
 	return 0;
 }
-
 

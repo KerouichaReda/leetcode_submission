@@ -125,6 +125,8 @@ int main(int argc, char **argv)
 	std::cout<<  longestPalindrome(test)<<std::endl;
 	//std::cout<<  test.substr(0,1)<<std::endl;
 	std::cout<< ispalin(test)<<std::endl;
+	
+	
 	return 0;
 }
 
