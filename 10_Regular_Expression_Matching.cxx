@@ -23,72 +23,102 @@
 
 
 #include <iostream>
+/*
+ * bool isMatch(string s, string p) {
+    int n = s.size();
+    int m = p.size();
+    if(n == 0 && m == 0) 
+        return true;
+    if(m == 0) 
+        return false;
+    vector<vector<bool>> dp(n+1, vector<bool>(m+1, false)); 
+    dp[0][0] = true; 
+    for(int j=2; j<=m; j++) 
+        dp[0][j] = dp[0][j-2] && p[j-1]=='*';
+    for(int i=1; i<=n; i++) {
+        for(int j=1; j<=m; j++) {
+            if(p[j-1] >= 'a' && p[j-1] <= 'z') dp[i][j] = dp[i-1][j-1] && (bool)(s[i-1]==p[j-1]);
+            else if(p[j-1] == '.') 
+                dp[i][j] = dp[i-1][j-1];
+            else if(j > 1) {
+                if(s[i-1] == p[j-2] || p[j-2] == '.') 
+                    dp[i][j] = dp[i-1][j] | dp[i][j-2];
+                else 
+                    dp[i][j] = dp[i][j-2];
+            }
+        }
+    }
+    return dp[n][m];    
+}
+};*/
 using namespace std;
-bool match(string s, string p,int i,int j);
-    bool isMatch(string s, string p) 
-    {
-        int ls=s.length();
-        int lp=p.length();
-        
-        
-        return match(s,p,ls-1,lp-1);
-        
-    }
-    bool match(string s, string p,int i,int j)
-    {
-        
-        int myi=(i-1)*(i>0);
-        int myj=(j-1)*(j>0);
-        std::cout<<s[i]<<" "<<p[j]<<" "<<i<<" "<<j<<std::endl;
-        
-        
-        if(i<=0 && j<=0 && p[1]=='*' && s[0]==s[1])
-            return true;
-        
-        if(i==0 && j==0)
-            return s[i]==p[j] || p[j]=='.';
-        
-        
-        
-        
-        if (s[i]==p[j] || p[j]=='.')
-        {
-            if((j==0 ) && (p[j]=='.' || p[j]==s[i]) && p[(j==(int)p.length()-1)?j:j+1]!='*')
-                return false;
-            return match(s,p,myi,myj);
-        }
-        else if (s[i]!=p[j] && p[j]!='.' && p[j]!='*')
-        {
-            return false;
-        
-        }
-        else if(p[j]=='*')
-        {
-            
-            if(s[i]!=p[myj] && myj>0)
-                return match(s,p,i,myj-1);
-            else if (s[i]!=p[myj] && myj==0)
-                return match(s,p,i,myj);
-            else if (s[i]==s[myi] && j>1 && i>1)
-                return match(s,p,myi,j);
-            else
-            return match(s,p,i,myj);
-        }
-        
-       return false ;
-    }
+bool matchhere(char *regexp, char *text);
+bool matchstar(char c, char *regexp, char *text);
+
+/* match: search for regexp anywhere in text */
+bool match(char *regexp, char *text)
+{	
+	do 
+	{    /* must look even if string is empty */
+		if (matchhere(regexp, text))
+		{
+			return true;
+		}
+	} 
+	while (*text++ != '\0' && *regexp++!='\0');
+	
+	return false;
+}
+
+/* matchhere: search for regexp at beginning of text */
+bool matchhere(char *regexp, char *text)
+{
+	//empty reg
+	if (regexp[0] == '\0')
+	{		
+		return text[0]=='\0';
+	}
+	//looking for the star matching	
+	if (regexp[1] == '*')
+	{
+		std::cout<<"*:"<<regexp<<" "<<text<<std::endl;
+		return matchstar(regexp[0], regexp+2, text);	
+	}
+	if (*text!='\0' && (regexp[0]=='.' || regexp[0]==*text))
+	{
+		std::cout<<"=:"<<regexp<<" "<<text<<std::endl;
+		return matchhere(regexp+1, text+1);
+	}	
+		
+	return false;
+}
+
+/* matchstar: search for c*regexp at beginning of text */
+bool matchstar(char c, char *regexp, char *text)
+{
+	char *t;
+
+	for (t = text; *t != '\0' && (*t == c || c == '.'); t++);
+	do 
+	{    /* a * matches zero or more instances */
+		if (matchhere(regexp, t))
+			return true;
+		std::cout<<"**l:"<<regexp<<" "<<text<<" "<<c<<std::endl;
+	} 
+	while (t-- > text);
+	//std::cout<<"**:"<<regexp<<" "<<text<<" "<<c<<std::endl;
+	return false;
+}
 
 
 int main(int argc, char **argv)
 {
-	std::string s[]={"aa","ab","aab","mississippi"};
-	std::string p[]={"a*",".*","c*a*b","c*mis*is*ip*.c*"};
-	int l=3;
-	
-		std::cout<<"s = "<<s[l]<<std::endl;
-		std::cout<<"p = "<<p[l]<<std::endl;
-		std::cout<<isMatch(s[l],p[l])<<std::endl;
-	
+	char reg[]="ab*a*c*d";
+	char text[]="aabd";
+
+
+
+	std::cout<<match(reg, text)<<std::endl;
 	return 0;
 }
 
