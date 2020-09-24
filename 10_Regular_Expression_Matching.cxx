@@ -11,7 +11,7 @@
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
+ * GNU General Public License for more details.z
  * 
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
@@ -23,7 +23,8 @@
 
 
 #include <iostream>
-/*
+/* Dynamic Programming
+/* 
  * bool isMatch(string s, string p) {
     int n = s.size();
     int m = p.size();
@@ -54,7 +55,9 @@
 using namespace std;
 bool matchhere(char *regexp, char *text);
 bool matchstar(char c, char *regexp, char *text);
-
+// Recursive (fail)
+// "aaba"
+// "ab*a*c*a"
 /* match: search for regexp anywhere in text */
 bool match(char *regexp, char *text)
 {	
