@@ -1,5 +1,5 @@
 /*
- * 389_Find_The_Difference.cxx
+ * 134_Gas_Station.cxx
  * 
  * Copyright 2020 RedaKerouicha <redakerouicha@localhost>
  * 
@@ -23,35 +23,31 @@
 
 
 #include <iostream>
-char findTheDifference(string s, string t) 
+
+int canCompleteCircuit(vector<int>& gas, vector<int>& cost) 
     {
-        std::vector<int> l(26,0),n(26,0);
-        for(int i=0;i<s.length();i++)
+        int tank=0;
+        int sz=(int)gas.size();
+        
+        for (int i=0;i<sz;i++)
         {
-            l[s[i]-'a']++; 
-            n[t[i]-'a']++;
+            std::cout<<"i= "<<i<<std::endl;
+            tank=gas[i];
+            for (int j=1;j<sz;j++)
+            {
+                tank+=gas[(i+j)%sz]-cost[(i+j-1)%sz];
+                std::cout<<tank<<std::endl;
+                if(tank<=0)
+                    break;
+            }
+            if(tank>gas[i])
+                return i;
+            
         }
-        n[t[t.length()-1]-'a']++;
-        for(int i=0;i<26;i++)
-        {
-           if(n[i]>l[i])
-               return (char)('a'+i);            
-        }
-        return NULL;
+        
+        return -1;
     }
-    
-    char findTheDifference(string s, string t) 
-    {
-        int i=0,l=0,n=0;
-        for(i=0;i<s.length();i++)
-        {
-            l+=s[i]-'a'; 
-            n+=t[i]-'a';
-        }
-        n+=t[i]-'a';
-       
-        return (char)n-l+'a';
-    }
+
 int main(int argc, char **argv)
 {
 	

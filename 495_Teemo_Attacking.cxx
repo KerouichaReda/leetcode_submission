@@ -1,5 +1,5 @@
 /*
- * 389_Find_The_Difference.cxx
+ * 495_Teemo_Attacking.cxx
  * 
  * Copyright 2020 RedaKerouicha <redakerouicha@localhost>
  * 
@@ -23,35 +23,30 @@
 
 
 #include <iostream>
-char findTheDifference(string s, string t) 
-    {
-        std::vector<int> l(26,0),n(26,0);
-        for(int i=0;i<s.length();i++)
-        {
-            l[s[i]-'a']++; 
-            n[t[i]-'a']++;
-        }
-        n[t[t.length()-1]-'a']++;
-        for(int i=0;i<26;i++)
-        {
-           if(n[i]>l[i])
-               return (char)('a'+i);            
-        }
-        return NULL;
-    }
-    
-    char findTheDifference(string s, string t) 
-    {
-        int i=0,l=0,n=0;
-        for(i=0;i<s.length();i++)
-        {
-            l+=s[i]-'a'; 
-            n+=t[i]-'a';
-        }
-        n+=t[i]-'a';
-       
-        return (char)n-l+'a';
-    }
+
+int findPoisonedDuration(vector<int>& timeSeries, int duration) 
+{
+	if(timeSeries.empty())		return 0;	
+	
+	int poison_time=timeSeries[0]+duration;
+	int total_duration=duration;
+	
+	for(int i=1;i<(int)timeSeries.size();i++)
+	{		
+		if(timeSeries[i]<poison_time)
+		{
+			total_duration+=timeSeries[i]-timeSeries[i-1];
+		}
+		else
+		{
+			total_duration+=duration;
+		}
+		poison_time=timeSeries[i]+duration;
+	}
+	
+	return total_duration;
+}
+
 int main(int argc, char **argv)
 {
 	

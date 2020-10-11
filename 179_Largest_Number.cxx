@@ -1,5 +1,5 @@
 /*
- * 389_Find_The_Difference.cxx
+ * 179_Largest_Number.cxx
  * 
  * Copyright 2020 RedaKerouicha <redakerouicha@localhost>
  * 
@@ -23,35 +23,30 @@
 
 
 #include <iostream>
-char findTheDifference(string s, string t) 
+
+std::string largestNumber(std::vector<int>& nums) 
     {
-        std::vector<int> l(26,0),n(26,0);
-        for(int i=0;i<s.length();i++)
-        {
-            l[s[i]-'a']++; 
-            n[t[i]-'a']++;
+        std::vector<std::string> num;
+        std::string sol="";        
+        for(int n : nums)
+        {               
+             num.push_back(std::to_string(n));
         }
-        n[t[t.length()-1]-'a']++;
-        for(int i=0;i<26;i++)
-        {
-           if(n[i]>l[i])
-               return (char)('a'+i);            
-        }
-        return NULL;
-    }
-    
-    char findTheDifference(string s, string t) 
-    {
-        int i=0,l=0,n=0;
-        for(i=0;i<s.length();i++)
-        {
-            l+=s[i]-'a'; 
-            n+=t[i]-'a';
-        }
-        n+=t[i]-'a';
        
-        return (char)n-l+'a';
+        std::sort(num.begin(),num.end(),[](string &s1, string &s2){ return s1+s2<s2+s1; });        
+        
+        for(int i=num.size()-1;i>=0;i--)
+        {           
+            sol+=num[i];
+        }
+        int i;
+        
+        while(sol[0]=='0' && sol.length()>1)
+            sol.erase(0,1);
+        
+        return sol;
     }
+
 int main(int argc, char **argv)
 {
 	

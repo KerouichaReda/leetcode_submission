@@ -1,5 +1,5 @@
 /*
- * 389_Find_The_Difference.cxx
+ * 61_Rotate_List.cxx
  * 
  * Copyright 2020 RedaKerouicha <redakerouicha@localhost>
  * 
@@ -23,35 +23,40 @@
 
 
 #include <iostream>
-char findTheDifference(string s, string t) 
-    {
-        std::vector<int> l(26,0),n(26,0);
-        for(int i=0;i<s.length();i++)
+#include <vector>
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+ListNode* rotateRight(ListNode* head, int k) {
+        if (head == nullptr)
+            return head;
+        std::vector<ListNode*> list;
+        ListNode* p=head;
+        int size=0;
+        int rot;
+        while(p!=nullptr)
         {
-            l[s[i]-'a']++; 
-            n[t[i]-'a']++;
+            list.push_back(p);
+            p=p->next;
+            size++;
         }
-        n[t[t.length()-1]-'a']++;
-        for(int i=0;i<26;i++)
+        rot=k%size;         
+        if(rot!=0)
         {
-           if(n[i]>l[i])
-               return (char)('a'+i);            
+            list[size-1]->next=list[0];        
+            list[(size-rot-1)%size]->next=nullptr;
         }
-        return NULL;
+        return list[(size-rot)%size];
+        
     }
-    
-    char findTheDifference(string s, string t) 
-    {
-        int i=0,l=0,n=0;
-        for(i=0;i<s.length();i++)
-        {
-            l+=s[i]-'a'; 
-            n+=t[i]-'a';
-        }
-        n+=t[i]-'a';
-       
-        return (char)n-l+'a';
-    }
+
 int main(int argc, char **argv)
 {
 	

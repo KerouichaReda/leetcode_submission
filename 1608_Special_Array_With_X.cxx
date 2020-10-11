@@ -1,5 +1,5 @@
 /*
- * 389_Find_The_Difference.cxx
+ * 1608_Special_Array_With_X.cxx
  * 
  * Copyright 2020 RedaKerouicha <redakerouicha@localhost>
  * 
@@ -18,40 +18,30 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301, USA.
  * 
- * 
+ * https://leetcode.com/problems/special-array-with-x-elements-greater-than-or-equal-x/
  */
 
 
 #include <iostream>
-char findTheDifference(string s, string t) 
-    {
-        std::vector<int> l(26,0),n(26,0);
-        for(int i=0;i<s.length();i++)
+#include <vector>
+#include <algorithm>
+
+ int specialArray(std::vector<int>& nums) {
+        
+        std::sort(nums.begin(),nums.end());
+        int min_index;
+        
+        for(int x=1,min_index=0;x<=nums.size();x++)
         {
-            l[s[i]-'a']++; 
-            n[t[i]-'a']++;
+            for (;  min_index<nums.size() && nums[min_index] < x;min_index++);
+            
+            if(nums.size()-min_index == x)
+                return x;
         }
-        n[t[t.length()-1]-'a']++;
-        for(int i=0;i<26;i++)
-        {
-           if(n[i]>l[i])
-               return (char)('a'+i);            
-        }
-        return NULL;
+        
+        return -1;
     }
-    
-    char findTheDifference(string s, string t) 
-    {
-        int i=0,l=0,n=0;
-        for(i=0;i<s.length();i++)
-        {
-            l+=s[i]-'a'; 
-            n+=t[i]-'a';
-        }
-        n+=t[i]-'a';
-       
-        return (char)n-l+'a';
-    }
+
 int main(int argc, char **argv)
 {
 	

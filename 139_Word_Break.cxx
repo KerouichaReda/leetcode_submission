@@ -1,5 +1,5 @@
 /*
- * 389_Find_The_Difference.cxx
+ * 139_Word_Break.cxx
  * 
  * Copyright 2020 RedaKerouicha <redakerouicha@localhost>
  * 
@@ -23,38 +23,31 @@
 
 
 #include <iostream>
-char findTheDifference(string s, string t) 
-    {
-        std::vector<int> l(26,0),n(26,0);
-        for(int i=0;i<s.length();i++)
-        {
-            l[s[i]-'a']++; 
-            n[t[i]-'a']++;
-        }
-        n[t[t.length()-1]-'a']++;
-        for(int i=0;i<26;i++)
-        {
-           if(n[i]>l[i])
-               return (char)('a'+i);            
-        }
-        return NULL;
-    }
-    
-    char findTheDifference(string s, string t) 
-    {
-        int i=0,l=0,n=0;
-        for(i=0;i<s.length();i++)
-        {
-            l+=s[i]-'a'; 
-            n+=t[i]-'a';
-        }
-        n+=t[i]-'a';
-       
-        return (char)n-l+'a';
-    }
+#include <string>
+#include <vector>
+#include <algorithm>
+bool wordBreak(std::string s, std::vector<std::string>& wordDict) 
+{
+
+	std::sort(wordDict.begin(),wordDict.end());
+	
+	for(std::string word:wordDict)
+	{		
+		while(s.find(word)!=std::string::npos)
+		{			
+			s.erase(s.find(word),(int)word.size());
+		}
+	}
+	
+	return s.empty();
+	
+}
 int main(int argc, char **argv)
 {
+	std::string s= "aaaaaaa";
+	std::vector<std::string> dic = {"aaaa","aa"};
 	
+	std::cout<<wordBreak(s,dic)<<std::endl;
 	return 0;
 }
 
