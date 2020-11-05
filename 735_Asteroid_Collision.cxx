@@ -29,21 +29,18 @@
 std::vector<int> asteroidCollision(std::vector<int>& asteroids) {
 	std::vector<int> solution;
 	std::list<int> right;
-	int length=asteroids.size();
-	
+	int length=asteroids.size();	
 	
 	for(int i=0;i<length;i++){		
 		if(right.empty() && asteroids[i]<0){
 			solution.push_back(asteroids[i]);
-		}
-		
+		}		
 		if(asteroids[i]>0){
 			right.push_back(asteroids[i]);
 		}		
 		else if(!right.empty() && asteroids[i]<0){
 			solution.push_back(asteroids[i]);
-			while( !right.empty()  ){
-				
+			while( !right.empty()  ){				
 				if(right.back()==-asteroids[i]){
 					right.pop_back();
 					solution.pop_back();
@@ -57,12 +54,10 @@ std::vector<int> asteroidCollision(std::vector<int>& asteroids) {
 					right.pop_back();                        
 				}   
 			}              
-		}
-		
-		}
-		
-		for(int n:right){
-			solution.push_back(n);
+		}		
+	}		
+	for(int n:right){
+		solution.push_back(n);
 	}
 	return solution;
 }
