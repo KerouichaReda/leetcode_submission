@@ -1,5 +1,5 @@
- /*
- * 704_Binary_Search.cxx
+/*
+ * 563_Binary_Tree_Tilt.cxx
  * 
  * Copyright 2020 RedaKerouicha <redakerouicha@localhost>
  * 
@@ -24,34 +24,31 @@
 
 #include <iostream>
 #include <vector>
-    
- int binary_search(std::vector<int>& nums, int target) { 
-	if(nums.empty())
-		return -1;
-	if(nums.size()==1)
-		return(nums[0]==target)?0:-1; 
 
-	int left,right,number,middle;
-	number=nums.size();
-	left=0;
-	right=number-1;
-	while(right>=left){
-	middle=(right+left)/2;
-		if(nums[middle]>target){
-			right=middle-1;
-		}
-		else if(nums[middle]<target){
-			left=middle+1;
-		}
-		else {
-			return middle;
-		}
-	}
-	return -1;
+#include  "treenode.hpp"
+
+
+int findTiltUtil(TreeNode* root,int &solution){
+	if(root!=nullptr){       
+           int left = findTiltUtil(root->left,solution);
+           int right = findTiltUtil(root->right,solution);
+           solution += std::abs(left-right);
+           return left+right+ root->val;        
+    }
+    return 0;
 }
+
+int findTilt(TreeNode* root) {
+		int solution=0;
+		findTiltUtil(root,solution);
+        return solution;
+    }
+
 int main(int argc, char **argv)
 {
-	
+	std::vector<int> array={21,7,14,1,1,2,2,3,3};
+	TreeNode *root = createTreeNodeFromArray(array);
+	std::cout<<findTilt(root)<<std::endl;
 	return 0;
 }
 

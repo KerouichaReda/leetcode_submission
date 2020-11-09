@@ -20,15 +20,17 @@
  * 
  * 
  */
+ // To Do :
+ // |x| - https://www.geeksforgeeks.org/tree-traversals-inorder-preorder-and-postorder/\
+ // | | - https://www.geeksforgeeks.org/print-ancestors-of-a-given-node-in-binary-tree/
+ 
 #ifndef TREENODE_HPP
 #define TREENODE_HPP
 
 #include <iostream>
 #include <vector>
+#include <queue>
 #include <algorithm>
-
-
-
 
  struct TreeNode {
      int val;
@@ -36,17 +38,52 @@
      TreeNode *right;
      TreeNode() : val(0), left(nullptr), right(nullptr) {}
      TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
-     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+     TreeNode(int x, TreeNode *left, TreeNode *right) : 
+			val(x), left(left), right(right) {}
  };
  
+ //Declaration
+ void preOrderDisplay (TreeNode* root);
+ void inOrderDisplay (TreeNode* root);
+ void postOrderDisplay (TreeNode* root);
+ void levelOrderDisplay(TreeNode* root);
+ void givenLevelDisplay(TreeNode* root,int level);
+ void breadthFirstDisplay(TreeNode* root);
+ TreeNode* createTreeNodeFromSortedArrayUtil(std::vector<int> &array,int start, int end);
+ TreeNode* createTreeNodeFromSortedArray(std::vector<int> &array);
+ int countNodes(TreeNode* root);
+ int getHeight(TreeNode *root);
+ TreeNode* createTreeNodeFromArrayUtil(std::vector<int> &array,int index,const int end);
+ TreeNode* createTreeNodeFromArray(std::vector<int> &array);
+ TreeNode* createTreeNodeFromArrayUtil(std::queue<int> &nodesLeft,const int vnull);
+ bool isBalanced(TreeNode* root);
  
-void preOrderDisplayRecursive (TreeNode* root){
+//Display a TreeNode in a pre order using a recursive function 
+void preOrderDisplay (TreeNode* root){
 	if(root!=nullptr){
 		std::cout<<root->val<<" " ;
-		preOrderDisplayRecursive(root->left);
-		preOrderDisplayRecursive(root->right);;
+		preOrderDisplay(root->left);
+		preOrderDisplay(root->right);;
 	}
 }
+
+void inOrderDisplay (TreeNode* root){
+	if(root!=nullptr){		
+		inOrderDisplay(root->left);
+		std::cout<<root->val<<" " ;
+		inOrderDisplay(root->right);;
+	}
+}
+
+void postOrderDisplay (TreeNode* root){
+	if(root!=nullptr){		
+		postOrderDisplay(root->left);		
+		postOrderDisplay(root->right);
+		std::cout<<root->val<<" " ;
+	}
+}
+
+//utility to Create a TreeNode from a sorted array
 TreeNode* createTreeNodeFromSortedArrayUtil(std::vector<int> &array,int start, int end){
 		if(end<=start){
 			return nullptr;
@@ -58,6 +95,7 @@ TreeNode* createTreeNodeFromSortedArrayUtil(std::vector<int> &array,int start, i
 		return tempTreeNode;
 }
 
+//
 TreeNode* createTreeNodeFromSortedArray(std::vector<int> &array){
 	return createTreeNodeFromSortedArrayUtil(array,0,(int)array.size());
 }
@@ -76,6 +114,7 @@ int getHeight(TreeNode *root){
 	}
 	return 0;
 }
+
 TreeNode* createTreeNodeFromArrayUtil(std::vector<int> &array,int index,const int end){
 	if(index>=end){
 		return nullptr;
@@ -89,15 +128,81 @@ TreeNode* createTreeNodeFromArrayUtil(std::vector<int> &array,int index,const in
 
 TreeNode* createTreeNodeFromArray(std::vector<int> &array){
 	int index = 0;
-	return createTreeNodeFromArrayUtil(array,index,(int)array.size());
+	return createTreeNodeFromArrayUtil(array,index,static_cast<int>(array.size()));
+}
+
+TreeNode* createTreeNodeFromArrayUtil(std::queue<int> &nodesLeft,const int vnull){
+	
+		if(!nodesLeft.empty()){
+			
+		if(nodesLeft.front()==vnull){
+			nodesLeft.pop();
+			return nullptr;
+		}
+		TreeNode* tempTreeNode = new TreeNode(nodesLeft.front()) ;
+		nodesLeft.pop();
+		
+		tempTreeNode->left = createTreeNodeFromArrayUtil(nodesLeft,vnull);		
+		tempTreeNode->right = createTreeNodeFromArrayUtil(nodesLeft,vnull);
+		return tempTreeNode;
+	}
+	return nullptr;
+}
+TreeNode* createTreeNodeFromArray(std::vector<int> &array,const int vnull){
+	
+	std::queue<int> nodesLeft;
+	for(int n: array){
+		nodesLeft.push(n);
+	}
+		
+	return createTreeNodeFromArrayUtil(nodesLeft,vnull);
 }
 
 
 bool isBalanced(TreeNode* root) {
-if(root!=nullptr){     
-		return isBalanced(root->left) and isBalanced(root->right) and std::abs(getHeight(root->left)-getHeight(root->right))<=1;
+	if(root!=nullptr){     
+		return isBalanced(root->left) and isBalanced(root->right) and 
+		std::abs(getHeight(root->left)-getHeight(root->right))<=1;
 	}
 	return true;
+}
+
+ void levelOrderDisplay(TreeNode* root){
+	 int height = getHeight(root);
+	 for(int i=1; i<=height;++i){
+		givenLevelDisplay(root,i);
+	 }
+	 
+ }
+ 
+ void givenLevelDisplay(TreeNode* root,int level){
+	 if(root !=nullptr){
+		if(level == 1){
+			std::cout<<root->val<<" ";
+		}else {
+			givenLevelDisplay(root->left,level-1);
+			givenLevelDisplay(root->right,level-1);
+		}
+	 }	
+ }
+ void breadthFirstDisplay(TreeNode* root) {
+	 if(root==nullptr)
+		return;
+		std::queue<TreeNode*> q;
+		TreeNode* temp;
+		q.push(root);
+		while(!q.empty()){
+			temp = q.front();
+			q.pop();
+			std::cout<<temp->val<<" ";
+			if(temp->left != nullptr){
+				q.push(temp->left);
+			}
+			if(temp->right != nullptr){
+				q.push(temp->right);
+			}
+		}
+		std::cout<<std::endl;
 }
 
 

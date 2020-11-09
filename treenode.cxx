@@ -20,34 +20,39 @@
  * 
  * 
  */
-
+#include "treenode.hpp"
 
 #include <iostream>
 
-#include "treenode.hpp"
+
 
 int main(int argc, char **argv)
 {
-	TreeNode * left =  new TreeNode(1);
-	TreeNode * right = new TreeNode(3);
-	TreeNode * root = new TreeNode(2,left,right);
-	std::vector<int> sortedArray={0,1,2,3,4,5,6};
-	std::vector<int> array;//={0,1,2};
+	//TreeNode * left =  new TreeNode(1);
+	//TreeNode * right = new TreeNode(3);
+	//TreeNode * root = new TreeNode(2,left,right);
+	std::vector<int> sortedArray={1,2,3,4,5};
+	//int vnull=-1;
+	//std::vector<int> array={0,1,vnull,vnull,2,3,vnull,vnull,4};
 	
-	for (int i = 0;i<7;i++){
-	 array.push_back(i);
-	}
-	TreeNode *root2 = createTreeNodeFromSortedArray(sortedArray);
-	TreeNode *root3 = createTreeNodeFromArray(array);
+	//TreeNode *root2 = createTreeNodeFromSortedArray(sortedArray);
+	TreeNode *root2 = createTreeNodeFromArray(sortedArray);
+	/*std::cout<<std::endl;
+	preOrderDisplay(root);
 	std::cout<<std::endl;
-	preOrderDisplayRecursive(root);
+	preOrderDisplay(root2);
+	std::cout<<std::endl;*/
+	inOrderDisplay(root2);
 	std::cout<<std::endl;
-	preOrderDisplayRecursive(root2);
+	preOrderDisplay(root2);
 	std::cout<<std::endl;
-	//preOrderDisplayRecursive(root3);
+	postOrderDisplay(root2);
 	std::cout<<std::endl;
-	std::cout<<countNodes(root3)<<std::endl;
-	std::cout<<getHeight(root3)<<std::endl;
+	levelOrderDisplay(root2);
+	std::cout<<std::endl;
+	breadthFirstDisplay(root2);
+	//std::cout<<countNodes(root3)<<std::endl;
+	std::cout<<getHeight(root2)<<std::endl;
 	return 0;
 }
 

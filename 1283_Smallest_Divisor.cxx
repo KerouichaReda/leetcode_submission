@@ -24,12 +24,11 @@
 
 #include <iostream>
 #include <vector>
-    int smallestDivisor(std::vector<int>& nums, int threshold) {
-	int max_num=(int)1e6;
-	int min_num=1;
+int smallestDivisor(std::vector<int>& nums, int threshold) {
+	int max_num=static_cast<int>(1e6);
+	int min_num={1};
 	int divisor;
 	int sum=0;
-
 	
 	while(max_num>min_num)	
 	{
@@ -37,17 +36,15 @@
 		sum=0;
 		for (int n :nums){
 			sum+=(n+divisor-1)/divisor;
-		}
-		
+		}		
 		if(sum>threshold){	
 			min_num=divisor+1;			
 		}else{			
 			max_num=divisor;
 		}		
 	}   
-	
         return min_num;
-    }
+}
 
 int main(int argc, char **argv)
 {
