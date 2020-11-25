@@ -1,5 +1,5 @@
 /*
- * treenode.cxx
+ * 56_Merge_Intervals.cxx
  * 
  * Copyright 2020 RedaKerouicha <redakerouicha@localhost>
  * 
@@ -14,30 +14,45 @@
  * GNU General Public License for more details.
  * 
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to thBe Free Software
+ * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301, USA.
  * 
  * 
  */
-#include "treenode.hpp"
+
 
 #include <iostream>
+#include <vector>
+#include <set>
 
-
+std::vector<std::vector<int>> merge(std::vector<std::vector<int>>& intervals) {
+	std::vector<std::vector<int>> solution;
+	std::set<int> all;
+	for(std::vector<int> interval:intervals){
+		for(int i =interval[0];i<=interval[1];i++){
+			all.insert(i);
+		}
+	}
+	int start =  *all.begin();
+	int end =start-1;boo
+	for (int element : all){
+        //std::cout<<element<<" "<<start<<" "<<end<<" "<<std::endl;
+		if(element!=end+1){
+			solution.push_back({start,end});
+			start=element;
+            end=element;
+		}else{
+			end=element;
+		}
+	}
+    solution.push_back({start,end});
+	return solution;
+}
 
 int main(int argc, char **argv)
 {
 	
-	std::vector<int> array;//={1,2,3,4,5};
-	for(int i=0;i<5000000;++i){
-		array.push_back(i);
-	}
-	
-	TreeNode * root = createTreeNodeFromArray(array);
-	getAncestor(root,1600509);
-	std::cout<<std::endl;
-
 	return 0;
 }
 

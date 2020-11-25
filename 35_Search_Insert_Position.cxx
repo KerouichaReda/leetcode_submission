@@ -1,5 +1,5 @@
 /*
- * treenode.cxx
+ * 35_Search_Insert_Position.cxx
  * 
  * Copyright 2020 RedaKerouicha <redakerouicha@localhost>
  * 
@@ -14,30 +14,32 @@
  * GNU General Public License for more details.
  * 
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to thBe Free Software
+ * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301, USA.
  * 
  * 
  */
-#include "treenode.hpp"
+
 
 #include <iostream>
-
-
-
+#include <vector>
+    int searchInsert(std::vector<int>& nums, int target) {
+        int length=static_cast<int>(nums.size());
+        for(int i=0;i<length;++i){
+            if(nums[i]==target){
+                return i;                
+            }else if(nums[i]>target){
+                return i;
+            }            
+        }
+        return length;
+        
+    }
 int main(int argc, char **argv)
 {
-	
-	std::vector<int> array;//={1,2,3,4,5};
-	for(int i=0;i<5000000;++i){
-		array.push_back(i);
-	}
-	
-	TreeNode * root = createTreeNodeFromArray(array);
-	getAncestor(root,1600509);
-	std::cout<<std::endl;
-
+	std::vector<int> nums = {1,2,4,5};
+	std::cout<<searchInsert(nums,3)<<std::endl;
 	return 0;
 }
 

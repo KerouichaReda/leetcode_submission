@@ -1,5 +1,5 @@
 /*
- * treenode.cxx
+ * 26_Remove_Duplicates.cxx
  * 
  * Copyright 2020 RedaKerouicha <redakerouicha@localhost>
  * 
@@ -14,30 +14,34 @@
  * GNU General Public License for more details.
  * 
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to thBe Free Software
+ * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301, USA.
  * 
  * 
  */
-#include "treenode.hpp"
+
 
 #include <iostream>
+#include <vector>
 
-
+int removeDuplicates(std::vector<int>& nums) {
+    int i = !nums.empty();    
+    for (int n : nums)
+        if (n > nums[i-1])
+            nums[i++] = n;
+    return i;
+}
 
 int main(int argc, char **argv)
 {
+	std::vector<int> nums = {0,0,1,1,1,2,2,3,3,4};
+	int result = removeDuplicates(nums);
 	
-	std::vector<int> array;//={1,2,3,4,5};
-	for(int i=0;i<5000000;++i){
-		array.push_back(i);
+	for(int i=0 ;i<result;++i){
+		std::cout<<nums[i]<<" ";
 	}
-	
-	TreeNode * root = createTreeNodeFromArray(array);
-	getAncestor(root,1600509);
 	std::cout<<std::endl;
-
 	return 0;
 }
 

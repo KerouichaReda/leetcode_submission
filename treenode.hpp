@@ -21,8 +21,9 @@
  * 
  */
  // To Do :
- // |x| - https://www.geeksforgeeks.org/tree-traversals-inorder-preorder-and-postorder/\
- // | | - https://www.geeksforgeeks.org/print-ancestors-of-a-given-node-in-binary-tree/
+ // |x| - https://www.geeksforgeeks.org/tree-traversals-inorder-preorder-and-postorder/
+ // |x| - https://www.geeksforgeeks.org/print-ancestors-of-a-given-node-in-binary-tree/
+ // | | - https://leetcode.com/problems/all-nodes-distance-k-in-binary-tree/
  
 #ifndef TREENODE_HPP
 #define TREENODE_HPP
@@ -56,9 +57,14 @@
  TreeNode* createTreeNodeFromArrayUtil(std::vector<int> &array,int index,const int end);
  TreeNode* createTreeNodeFromArray(std::vector<int> &array);
  TreeNode* createTreeNodeFromArrayUtil(std::queue<int> &nodesLeft,const int vnull);
- bool isBalanced(TreeNode* root);
+ bool isBalanced(TreeNode* root); 
+ bool getAncestor(TreeNode* root , TreeNode* target);
+ bool getAncestor(TreeNode* root , int target);
+ void getLevelNodes(TreeNode* root,int level,std::vector<int> &vec);
  
-//Display a TreeNode in a pre order using a recursive function 
+ int getNodeLevel(TreeNode* root,TreeNode* target,int level);
+ int getNodeLevel(TreeNode* root,int target,int level);
+ 
 void preOrderDisplay (TreeNode* root){
 	if(root!=nullptr){
 		std::cout<<root->val<<" " ;
@@ -83,7 +89,6 @@ void postOrderDisplay (TreeNode* root){
 	}
 }
 
-//utility to Create a TreeNode from a sorted array
 TreeNode* createTreeNodeFromSortedArrayUtil(std::vector<int> &array,int start, int end){
 		if(end<=start){
 			return nullptr;
@@ -95,7 +100,6 @@ TreeNode* createTreeNodeFromSortedArrayUtil(std::vector<int> &array,int start, i
 		return tempTreeNode;
 }
 
-//
 TreeNode* createTreeNodeFromSortedArray(std::vector<int> &array){
 	return createTreeNodeFromSortedArrayUtil(array,0,(int)array.size());
 }
@@ -148,6 +152,7 @@ TreeNode* createTreeNodeFromArrayUtil(std::queue<int> &nodesLeft,const int vnull
 	}
 	return nullptr;
 }
+
 TreeNode* createTreeNodeFromArray(std::vector<int> &array,const int vnull){
 	
 	std::queue<int> nodesLeft;
@@ -157,7 +162,6 @@ TreeNode* createTreeNodeFromArray(std::vector<int> &array,const int vnull){
 		
 	return createTreeNodeFromArrayUtil(nodesLeft,vnull);
 }
-
 
 bool isBalanced(TreeNode* root) {
 	if(root!=nullptr){     
@@ -185,9 +189,9 @@ bool isBalanced(TreeNode* root) {
 		}
 	 }	
  }
+ 
  void breadthFirstDisplay(TreeNode* root) {
-	 if(root==nullptr)
-		return;
+	 if(root!=nullptr){	
 		std::queue<TreeNode*> q;
 		TreeNode* temp;
 		q.push(root);
@@ -203,7 +207,70 @@ bool isBalanced(TreeNode* root) {
 			}
 		}
 		std::cout<<std::endl;
+	}
 }
 
+bool getAncestor(TreeNode* root , TreeNode* target){
+	if(root==nullptr){
+		return false;
+	}else if (root == target){
+		return true;
+	}
+	
+	if (getAncestor(root->left,target) || getAncestor(root->right,target)){
+		std::cout<<root->val<<" ";
+		return true;
+	}
+	return false;
+}
+bool getAncestor(TreeNode* root , int target){
+	if(root==nullptr){
+		return false;
+	}else if (root->val == target){
+		return true;
+	}
+	
+	if (getAncestor(root->left,target) || getAncestor(root->right,target)){
+		std::cout<<root->val<<" ";
+		return true;
+	}
+	return false;
+}
+void getLevelNodes(TreeNode* root,int level,std::vector<int> &vec){
+	if(root!=nullptr){
+		if(level==1){
+			vec.push_back(root->val);
+		}
+		else {
+			getLevelNodes(root->left,level-1,vec);
+			getLevelNodes(root->right,level-1,vec);
+		}
+	}
+}
 
+int getNodeLevel(TreeNode* root,TreeNode* target,int level=1){
+	if(root !=nullptr){
+		if(root==target){
+			return level;
+		}
+		else{
+			return getNodeLevel(root->left,target, level+1)+
+			getNodeLevel(root->right,target, level+1);
+		}		
+	}
+	return 0;
+}
+
+int getNodeLevel(TreeNode* root,int target,int level=1){
+	if(root !=nullptr){
+		if(root->val==target){
+			return level;
+		}
+		else{
+			return getNodeLevel(root->left,target, level+1)+
+			getNodeLevel(root->right,target, level+1);
+		}		
+	}
+	return 0;
+}
 #endif // TREENODE

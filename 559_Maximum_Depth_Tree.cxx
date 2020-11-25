@@ -1,5 +1,5 @@
 /*
- * treenode.cxx
+ * 559_Maximum_Depth_Tree.cxx
  * 
  * Copyright 2020 RedaKerouicha <redakerouicha@localhost>
  * 
@@ -14,30 +14,29 @@
  * GNU General Public License for more details.
  * 
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to thBe Free Software
+ * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301, USA.
  * 
  * 
  */
-#include "treenode.hpp"
+
 
 #include <iostream>
 
-
+int maxDepth(Node* root) {
+	if (root == nullptr)
+		return 0;
+	int m = 0;
+	for (Node* n : root->children){
+		m = std::max(m,maxDepth(n));
+	}
+	return m + 1;        
+}
 
 int main(int argc, char **argv)
 {
 	
-	std::vector<int> array;//={1,2,3,4,5};
-	for(int i=0;i<5000000;++i){
-		array.push_back(i);
-	}
-	
-	TreeNode * root = createTreeNodeFromArray(array);
-	getAncestor(root,1600509);
-	std::cout<<std::endl;
-
 	return 0;
 }
 

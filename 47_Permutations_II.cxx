@@ -1,5 +1,5 @@
 /*
- * 1608_Special_Array_With_X.cxx
+ * 47_Permutations_II.cxx
  * 
  * Copyright 2020 RedaKerouicha <redakerouicha@localhost>
  * 
@@ -18,32 +18,42 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301, USA.
  * 
- * https://leetcode.com/problems/special-array-with-x-elements-greater-than-or-equal-x/
+ * 
  */
 
 
 #include <iostream>
 #include <vector>
 #include <algorithm>
-
-int specialArray(std::vector<int>& nums) {
-    
-    std::sort(nums.begin(),nums.end());
-    int min_index;
-    
-    for(int x=1,min_index=0;x<=nums.size();x++)
-    {
-        for (;  min_index<nums.size() && nums[min_index] < x;min_index++);
-        
-        if(nums.size()-min_index == x)
-            return x;
-    }
-    
-    return -1;
+void displayArray(std::vector<int> &array){
+	for(int e:array){
+		std::cout<<e<<" ";
+	}
+	std::cout<<std::endl;
 }
+void generate(std::vector<int> num, int begin, int end, std::vector<std::vector<int> > &res) {
+	if (begin == end-1) {
+		res.push_back(num);
+		return;
+	}
+	for (int i = begin; i < end; i++) {
+		if (begin != i && num[begin] == num[i]) 
+			continue;
+		std::swap(num[begin], num[i]);
+		generate(num, begin+1, end, res);
+	}
+}
+std::vector<std::vector<int> > permuteUnique(std::vector<int> &num) {
+	std::sort(num.begin(), num.end());
+	std::vector<std::vector<int> >res;
+	generate(num, 0, num.size(), res);
+	return res;
+}
+
 
 int main(int argc, char **argv)
 {
+	std::vector<int> array = {1,1,2};
 	
 	return 0;
 }

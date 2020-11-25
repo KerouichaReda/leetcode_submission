@@ -1,5 +1,5 @@
 /*
- * treenode.cxx
+ * 112_Path_Sum.cxx
  * 
  * Copyright 2020 RedaKerouicha <redakerouicha@localhost>
  * 
@@ -14,30 +14,30 @@
  * GNU General Public License for more details.
  * 
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to thBe Free Software
+ * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301, USA.
  * 
  * 
  */
-#include "treenode.hpp"
+
 
 #include <iostream>
+#include "treenode.hpp"
 
-
+bool hasPathSum(TreeNode* root, int &sum,int add=0) {
+	if(root==nullptr)
+		return false;
+	if(add+root->val == sum && root->left == nullptr && root->right == nullptr){
+		return true;
+	}else{
+		return hasPathSum(root->left, sum,add+root->val) || hasPathSum(root->right, sum,add+root->val);
+	}  
+}
 
 int main(int argc, char **argv)
 {
 	
-	std::vector<int> array;//={1,2,3,4,5};
-	for(int i=0;i<5000000;++i){
-		array.push_back(i);
-	}
-	
-	TreeNode * root = createTreeNodeFromArray(array);
-	getAncestor(root,1600509);
-	std::cout<<std::endl;
-
 	return 0;
 }
 

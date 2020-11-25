@@ -1,5 +1,5 @@
 /*
- * treenode.cxx
+ * 1026_Maximum_Difference.cxx
  * 
  * Copyright 2020 RedaKerouicha <redakerouicha@localhost>
  * 
@@ -14,30 +14,35 @@
  * GNU General Public License for more details.
  * 
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to thBe Free Software
+ * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301, USA.
  * 
  * 
  */
-#include "treenode.hpp"
+
 
 #include <iostream>
+#include <vector>
+#include <algorithm>
 
+#include "treenode.hpp"
 
+int maxAncestorDiff(TreeNode* root, int minNode = 100001, int maxNode = -1){    
+    if(root!=nullptr){		
+        return std::max(
+            maxAncestorDiff(root->left , std::min(minNode, root->val), std::max(maxNode, root->val)),
+            maxAncestorDiff(root->right, std::min(minNode, root->val), std::max(maxNode, root->val))
+        );
+	}	
+	return  maxNode - minNode;
+}
 
 int main(int argc, char **argv)
 {
-	
-	std::vector<int> array;//={1,2,3,4,5};
-	for(int i=0;i<5000000;++i){
-		array.push_back(i);
-	}
-	
-	TreeNode * root = createTreeNodeFromArray(array);
-	getAncestor(root,1600509);
-	std::cout<<std::endl;
-
+	std::vector<int> array = {1,2,3,4,5};
+	TreeNode* root = createTreeNodeFromArray(array);
+	std::cout<< maxAncestorDiff(root)<<std::endl;
 	return 0;
 }
 
