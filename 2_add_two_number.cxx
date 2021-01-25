@@ -29,40 +29,24 @@ struct ListNode {
       ListNode(int x) : val(x), next(nullptr) {}
       ListNode(int x, ListNode *next) : val(x), next(next) {}
   };
- ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {       
-      
-        
-        ListNode  *ptr1=l1;
-        ListNode  *ptr2=l2; 
-        int sum = (*ptr1).val+(*ptr2).val;
-        int rest = 0;
-        ListNode  *result = new ListNode(sum) ;
-        ListNode  *ptr3=result;
-        
-        while(ptr1!= nullptr)
-        {
-                
-            
-            //std::cout<<ptr1<<" "<<sum<<std::endl;
-            if((*ptr1).next== nullptr)
-            {
-                break;
-            }
-            ptr1=(*ptr1).next;
-            ptr2=(*ptr2).next; 
-            sum=(*ptr1).val+(*ptr2).val+rest;
-            rest = (int)sum /10;
-            sum = sum%10;
-            ListNode *r= new ListNode(sum) ; 
-            
-            (*ptr3).next=r;  
-            ptr3=r;
-            
-             
-        }
-
-        return result;
-    }
+ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {    
+	ListNode* result = new ListNode(0);
+	ListNode* l3=result;
+	int n1,n2,sum = 0;
+	int rest = 0;
+	while(l1!= nullptr || l2!= nullptr || rest >0)
+	{   
+		n1 = (l1!= nullptr)?l1->val:0;
+		n2 = (l2!= nullptr)?l2->val:0;
+		sum = (n1 + n2 +rest) % 10;
+		rest = (n1 + n2 +rest) / 10;
+		l3->next = new ListNode(sum);            
+		l1 = (l1!= nullptr)?l1->next:nullptr;
+		l2 = (l2!= nullptr)?l2->next:nullptr;
+		l3= l3->next;       
+	}
+	return result->next;
+}
 
 #include <iostream>
 

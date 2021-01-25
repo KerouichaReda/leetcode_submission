@@ -1,7 +1,7 @@
 /*
- * heap.cxx
+ * 1673_Find_the_Most_Competitive_Subsequence.cxx
  * 
- * Copyright 2020 RedaKerouicha <redakerouicha@localhost>
+ * Copyright 2021 RedaKerouicha <redakerouicha@localhost>
  * 
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,21 +21,39 @@
  * 
  */
 
-#include "heap.hpp"
+
 #include <iostream>
+#include <vector>
+
+void disp(std::vector<int>& A){
+	for(int n : A){
+		std::cout<< n << " ";
+	}	
+	std::cout<< std::endl;
+}
+
+std::vector<int> mostCompetitive(std::vector<int>& n, int k) {
+    std::vector<int> stack;
+    int l = n.size();
+    for(int i = 0; i< l ; i++){
+        while (!stack.empty() && stack.back()> n[i] && l-i + stack.size()>(unsigned)k ){
+            stack.pop_back();
+        }
+        if(stack.size()<(unsigned)k){
+            stack.push_back(n[i]);
+        }
+        disp(stack);
+    }
+    return stack;
+}
 
 int main(int argc, char **argv)
 {
+	std::vector<int> array ={3,5,2,6,6,6,6,6,6,6,6,1,0};
+	int k = 2;
+	std::vector<int> solution = mostCompetitive(array,k);
+	disp(solution);
 	
-	int array[] = {1,2,3,4,5,6,7,8,9,1};
-	
-	for(int i ; i<10;i++)
-		std::cout<<array[i]<<" ";
-	std::cout<<std::endl;
-	
-	Heap<int> h(array,10,100);
-	h.display_heap();
-
 	return 0;
 }
 

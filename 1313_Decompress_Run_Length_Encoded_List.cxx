@@ -1,7 +1,7 @@
 /*
- * treenode.cxx
+ * 1313_Decompress_Run_Length_Encoded_List.cxx
  * 
- * Copyright 2020 RedaKerouicha <redakerouicha@localhost>
+ * Copyright 2021 RedaKerouicha <redakerouicha@localhost>
  * 
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -14,31 +14,36 @@
  * GNU General Public License for more details.
  * 
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to thBe Free Software
+ * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301, USA.
  * 
  * 
  */
 
-#include "treenode.hpp"
 
 #include <iostream>
+#include <vector>
 
-
+std::vector<int> decompressRLElist(std::vector<int>& nums) {
+	std::vector<int> solution ;        
+	for(int i = 0 ;(unsigned) i<nums.size();i+=2){
+		for(int j=0;j<nums[i];j++){
+			solution.push_back(nums[i+1]);
+		}
+	}
+	return solution;
+}
 
 int main(int argc, char **argv)
 {
+	std::vector<int> nums = {1,2,3,4};
+	std::vector<int> solution = decompressRLElist(nums) ;
 	
-	std::vector<int> array;//={1,2,3,4,5};
-	for(int i=0;i<5;++i){
-		array.push_back(i);
+	for (int n : solution){
+		std::cout << n << " " ;
 	}
-	
-	TreeNode * root = createTreeNodeFromSortedArray(array);
-	preOrderDisplayIter(root);
-	std::cout<<std::endl;
-
+	std::cout << std::endl;
 	return 0;
 }
 

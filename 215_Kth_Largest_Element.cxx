@@ -1,7 +1,7 @@
 /*
- * treenode.cxx
+ * 215_Kth_Largest_Element.cxx
  * 
- * Copyright 2020 RedaKerouicha <redakerouicha@localhost>
+ * Copyright 2021 RedaKerouicha <redakerouicha@localhost>
  * 
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -14,31 +14,35 @@
  * GNU General Public License for more details.
  * 
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to thBe Free Software
+ * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301, USA.
  * 
- * 
+ * https://leetcode.com/problems/kth-largest-element-in-an-array/
+ * https://www.reddit.com/r/cscareerquestions/comments/kyjwim/just_got_laid_off/
  */
 
-#include "treenode.hpp"
 
 #include <iostream>
+#include <vector>
+#include <algorithm>
 
 
+int findKthLargest(std::vector<int>& nums, int k) {        
+	std::make_heap(nums.begin(),nums.end());       
+	for(int i = 0 ; i < k-1; i++){            
+		std::pop_heap(nums.begin(),nums.end());
+		nums.pop_back();            
+	}
+	return nums.front();
+}
 
 int main(int argc, char **argv)
 {
+	std::vector<int> nums = {1,2,3,4,5,6,7,8,9,10};
+	int k = 5 ;
+	std::cout << findKthLargest(nums,  k) << std::endl;
 	
-	std::vector<int> array;//={1,2,3,4,5};
-	for(int i=0;i<5;++i){
-		array.push_back(i);
-	}
-	
-	TreeNode * root = createTreeNodeFromSortedArray(array);
-	preOrderDisplayIter(root);
-	std::cout<<std::endl;
-
 	return 0;
 }
 

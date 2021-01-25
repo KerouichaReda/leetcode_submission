@@ -1,7 +1,7 @@
 /*
- * treenode.cxx
+ * 88_Merge_Sorted_Array.cxx
  * 
- * Copyright 2020 RedaKerouicha <redakerouicha@localhost>
+ * Copyright 2021 RedaKerouicha <redakerouicha@localhost>
  * 
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -14,31 +14,31 @@
  * GNU General Public License for more details.
  * 
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to thBe Free Software
+ * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301, USA.
  * 
  * 
  */
 
-#include "treenode.hpp"
 
 #include <iostream>
+#include <vector>
 
-
+    void merge(vector<int>& nums1, int m, vector<int>& nums2, int n) {
+        
+        if(n>0){
+        for(int i = 0;i<n ; i++){
+            nums1[m+i]=nums2[i];
+        }
+        
+        std::sort(nums1.begin(),nums1.end());
+        }
+    }
 
 int main(int argc, char **argv)
 {
 	
-	std::vector<int> array;//={1,2,3,4,5};
-	for(int i=0;i<5;++i){
-		array.push_back(i);
-	}
-	
-	TreeNode * root = createTreeNodeFromSortedArray(array);
-	preOrderDisplayIter(root);
-	std::cout<<std::endl;
-
 	return 0;
 }
 

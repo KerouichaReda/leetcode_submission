@@ -1,7 +1,7 @@
 /*
- * treenode.cxx
+ * 881_Boats_to_Save_People.cxx
  * 
- * Copyright 2020 RedaKerouicha <redakerouicha@localhost>
+ * Copyright 2021 RedaKerouicha <redakerouicha@localhost>
  * 
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -14,31 +14,36 @@
  * GNU General Public License for more details.
  * 
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to thBe Free Software
+ * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301, USA.
  * 
  * 
  */
 
-#include "treenode.hpp"
 
 #include <iostream>
+#include <vector>
+#include <algorithm>
 
-
-
-int main(int argc, char **argv)
-{
-	
-	std::vector<int> array;//={1,2,3,4,5};
-	for(int i=0;i<5;++i){
-		array.push_back(i);
+int numRescueBoats(std::vector<int>& people, int limit) {
+	std::sort(people.rbegin(),people.rend());
+	int i = 0;
+	int j = people.size() - 1 ;
+	for( ;i <= j; i++){
+		if(people[i]+people[j] <= limit) j--;
 	}
 	
-	TreeNode * root = createTreeNodeFromSortedArray(array);
-	preOrderDisplayIter(root);
-	std::cout<<std::endl;
+	return i;
+}
 
+int main(int argc, char **argv)
+
+{
+	std::vector<int> people = {3,2,2,1};
+	int limit = 3;
+	std::cout << numRescueBoats(people,  limit) << std::endl;
+	
 	return 0;
 }
 

@@ -31,6 +31,7 @@
 #include <iostream>
 #include <vector>
 #include <queue>
+#include <stack>
 #include <algorithm>
 
  struct TreeNode {
@@ -45,7 +46,9 @@
  
  //Declaration
  void preOrderDisplay (TreeNode* root);
+ void preOrderDisplayIter (TreeNode* root);
  void inOrderDisplay (TreeNode* root);
+ void inOrderDisplayIter (TreeNode* root);
  void postOrderDisplay (TreeNode* root);
  void levelOrderDisplay(TreeNode* root);
  void givenLevelDisplay(TreeNode* root,int level);
@@ -272,5 +275,36 @@ int getNodeLevel(TreeNode* root,int target,int level=1){
 		}		
 	}
 	return 0;
+}
+
+void inOrderDisplayIter (TreeNode* root){
+	std::stack<TreeNode*> q;
+	TreeNode* temp = root;
+	
+	while (temp!=nullptr || !q.empty()){		
+		while(temp!=nullptr){
+			q.push(temp);
+			temp=temp->left;
+		}
+		temp = q.top();
+		q.pop();
+		std::cout << temp->val << " ";
+		temp= temp->right;
+		
+	}
+ }
+ 
+void preOrderDisplayIter (TreeNode* root){
+	std::stack<TreeNode*> q ;
+	TreeNode* temp = root ;
+	q.push(temp);
+	while(!q.empty())
+	{
+		temp = q.top();
+		q.pop();
+		std::cout << temp->val << " ";		
+		if(temp->right != nullptr) q.push(temp->right);
+		if(temp->left != nullptr) q.push(temp->left);
+	}
 }
 #endif // TREENODE

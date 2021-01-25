@@ -1,5 +1,5 @@
 /*
- * heap.hpp
+ * Heap<E >.hpp
  * 
  * Copyright 2020 RedaKerouicha <redakerouicha@localhost>
  * 
@@ -18,111 +18,144 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301, USA.
  * TODP :
- * | | - https://www.fluentcpp.com/2018/03/13/heaps-priority-queues-stl-part-1/
- * | | - https://www.geeksforgeeks.org/heap-data-structure/
+ * | | - https://www.fluentcpp.com/2018/03/13/Heap<E >s-priority-queues-stl-part-1/
+ * | | - https://www.geeksforgeeks.org/Heap-data-structure/
+ * https://www.cc.gatech.edu/classes/cs3158_98_fall/heapsort.html
+ * http://faculty.cs.niu.edu/~freedman/340/340notes/340heap.htm
+ * 
  */
 
 #ifndef HEAP_HPP
 #define HEAP_HPP
 
-#include <vector>
-#include <algorithm>
+
+
 #include <iostream>
-class MinHeap {
+#include <algorithm>
+#include <cassert>
+
+template<typename E >
+class Heap {
 	public:
-	int size(); // return the size of the heap
-	bool empty(); // check if the heap is empty
-	void push(int element); //insert an element into the heap
-	void push_array(std::vector<int> &array);
-	void pop(); //remove element with the lower priority
-	int top(); //return element with the lower priority
+	Heap(E* h,int num,int max);//Constructor
+	int size();
+	bool isLeaf(int pos);
+	int left_child(int pos);
+	int right_child(int pos);
+	int parent(int pos);
+	void buildHeap();
+	void insert(const E& it);
+	E removeFirst();
+	E removeAt(int pos);
+	bool empty();
+	void display_heap();
+	
+
 	
 	private:
-	std::vector<int> heap; // Pvector to store the heap
-	int parent(int index); // return the parent index
-	int left_child(int index); // return the left child index
-	int right_child(int index); // return the right child index
-	void heapify_down(int index); //heapify down
-	void heapify_up(int index); // heapify up
+	E* heap; //Pointer to the Heap<E > array
+	int maxsize; //Maximum size of the Heap<E >
+	int n; // number of elements
+	void shiftdown(int pos);
+	bool prior(int a,int b);
+	
 };
-
-int MinHeap::parent(int index){
-	return (index-1)/2;
+template<typename E>
+Heap<E>::Heap(E* h,int num,int max){
+	heap=h; 
+	n = num; 
+	maxsize =max;
+	buildHeap();
 }
-int MinHeap::left_child(int index){
-	return (2*index+1);
+template<typename E >
+bool Heap<E>::prior(int a, int b){
+	return a < b;
 }
-int MinHeap::right_child(int index){
-	return (2*index+2);
-}
-void MinHeap::heapify_down(int index){
-	int left = left_child(index);
-	int right = right_child(index);
-	
-	int smallest = index;
-	if(left < size() && heap[left]<heap[index]){
-		smallest = left;
+template<typename E >
+void Heap<E >::shiftdown(int pos){
+	while(!isLeaf(pos)){
+		int j = left_child(pos);
+		int rc = right_child(pos);
+		if((rc < n) &&  prior(heap[rc],heap[j])){
+			j = rc; // Set j to greater child's value
+		}
+		if( prior(heap[pos],heap[j]))
+			return;
+		std::swap(heap[pos],heap[j]);
+		pos=j; // Move down
 	}
-	if(right < size() && heap[left]<heap[smallest]){
-		smallest = right;
+}
+template<typename E >
+int Heap<E >::parent(int pos){
+	return (pos-1)/2;
+}
+template<typename E >
+int Heap<E >::left_child(int pos){
+	return (2*pos+1);
+}
+template<typename E >
+int Heap<E >::right_child(int pos){
+	return (2*pos+2);
+}
+template<typename E >
+int Heap<E >::size(){
+	return n;
+}
+template<typename E >
+bool Heap<E >::empty(){
+	return n == 0 ;
+}
+template<typename E >
+bool Heap<E >::isLeaf(int pos){
+	return (pos >= n/2) && pos <n;
+}
+template<typename E >	 
+void Heap<E >::buildHeap(){
+	for (int i = n/2-1; i >= 0; --i){
+		shiftdown(i);		
 	}	
-	if (smallest != index){
-		std::swap(heap[index],heap[smallest]);
-		heapify_down(smallest);
+}
+template<typename E >
+void Heap<E >::insert(const E& it){
+	assert((n < maxsize) && "Heap is full");
+	int curr = n++;
+	heap[curr] = it;
+	
+	while((curr!=0) && ( prior(heap[curr], heap[parent(curr)]))){
+		std::swap(heap[curr], heap[parent(curr)]);
+		curr = parent(curr);
 	}
+}
+
+template<typename E >
+E Heap<E >::removeFirst(){
+	assert((n > 0) && "Heap is empty");
+	std::swap(heap[0],heap[--n]);
+	if(n != 0) shiftdown(0);
+	return heap[n];
+}
+template<typename E>
+E Heap<E>::removeAt(int pos){
+	assert((pos >= 0) && (pos<n) && "Heap is empty");
+	if(pos == (n-1)) n--;
+	else {
+		swap(heap, pos, --n);
+		while((pos != 0) && 
+		( prior(heap[pos],heap[parent(pos)]))){
+			swap(heap,pos,parent(pos));
+			pos = parent(pos);
+		}
+		if(n!=0) shiftdown(pos);
+	}
+	return heap[n];
+}
+template<typename E>
+void Heap<E>::display_heap(){
+	for(int i=0;i<10;++i){
+		std::cout<<heap[i]<<" ";
+	}
+	std::cout<<std::endl;
 	
 }
-void MinHeap::heapify_up(int index){
-	if(index && heap[parent(index)] > heap[index]){
-		std::swap(heap[index],heap[parent(index)]);
-		heapify_up(parent(index));
-	}
-}
 
-int MinHeap::size(){
-	return static_cast<int>(heap.size());
-}
-
-bool MinHeap::empty(){
-	return size() == 0 ;
-}
-void MinHeap::push(int element){
-	return heap.push_back(element);
-	int index = size() - 1;
-	heapify_up(index);
-}
-
-void MinHeap::pop(){
-	try{
-		if(size() == 0)
-			throw std::out_of_range("Heap<X>::at() : index is out of range");
-			
-		heap[0] = heap.back();
-		heap.pop_back();
-		heapify_down(0);
-	}
-	 catch (const std::out_of_range& oor) {
-            std::cout << "\n" << oor.what();
-        }
-}
-
-int MinHeap::top(){
-	try {
-		if(size() == 0)
-			throw std::out_of_range("Heap<X>::at() : index is out of range");
-			
-		return heap.at(0);
-	}
-	catch (const std::out_of_range& oor) {
-            std::cout << "\n" << oor.what();
-     }
-     return -1;
-}
-
-void MinHeap::push_array(std::vector<int> &array){
-	for(int e : array){
-		push(e);
-	}
-}
-
-#endif // HEAP
+#endif // Heap

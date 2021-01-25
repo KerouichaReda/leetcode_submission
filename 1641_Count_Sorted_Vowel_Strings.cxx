@@ -1,7 +1,7 @@
 /*
- * treenode.cxx
+ * 1641_Count_Sorted_Vowel_Strings.cxx
  * 
- * Copyright 2020 RedaKerouicha <redakerouicha@localhost>
+ * Copyright 2021 RedaKerouicha <redakerouicha@localhost>
  * 
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -14,31 +14,29 @@
  * GNU General Public License for more details.
  * 
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to thBe Free Software
+ * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301, USA.
  * 
  * 
  */
 
-#include "treenode.hpp"
 
 #include <iostream>
+#include <vector>
 
-
+int countVowelStrings(int n) {
+	std::vector<std::vector<int>>dp(n + 1, std::vector<int>(6));
+	for (int i = 1; i <= n; ++i)
+		for (int k = 1; k <= 5; ++k)
+			dp[i][k] = dp[i][k - 1] + (i > 1 ? dp[i - 1][k] : 1);
+	return dp[n][5];
+}
 
 int main(int argc, char **argv)
 {
-	
-	std::vector<int> array;//={1,2,3,4,5};
-	for(int i=0;i<5;++i){
-		array.push_back(i);
-	}
-	
-	TreeNode * root = createTreeNodeFromSortedArray(array);
-	preOrderDisplayIter(root);
-	std::cout<<std::endl;
-
+	int n = 100;
+	std::cout << countVowelStrings(n) << std::endl;
 	return 0;
 }
 

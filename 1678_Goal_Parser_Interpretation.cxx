@@ -1,7 +1,7 @@
 /*
- * treenode.cxx
+ * 1678_Goal_Parser_Interpretation.cxx
  * 
- * Copyright 2020 RedaKerouicha <redakerouicha@localhost>
+ * Copyright 2021 RedaKerouicha <redakerouicha@localhost>
  * 
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -14,31 +14,35 @@
  * GNU General Public License for more details.
  * 
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to thBe Free Software
+ * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301, USA.
  * 
  * 
  */
 
-#include "treenode.hpp"
 
 #include <iostream>
+#include <string> 
 
-
+std::string interpret(std::string &command,unsigned index = 0) {
+	if(index <  command.size()){
+		if(command[index] == 'G')
+			return command[index] + interpret(command,index + 1);
+		else if (command[index+1] == ')')
+			return 'o' + interpret(command,index+2);
+		else {                
+			return "al"+interpret(command,index+4);
+		}
+   } 
+	return "";
+}
 
 int main(int argc, char **argv)
 {
+	std::string command{"G()()()()()()()()()()(al)"};	
+	std::cout << interpret(command) << std::endl;
 	
-	std::vector<int> array;//={1,2,3,4,5};
-	for(int i=0;i<5;++i){
-		array.push_back(i);
-	}
-	
-	TreeNode * root = createTreeNodeFromSortedArray(array);
-	preOrderDisplayIter(root);
-	std::cout<<std::endl;
-
 	return 0;
 }
 

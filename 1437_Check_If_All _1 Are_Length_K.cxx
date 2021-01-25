@@ -1,7 +1,7 @@
 /*
- * treenode.cxx
+ * 1437_Check_If_All _1 Are_Length_K.cxx
  * 
- * Copyright 2020 RedaKerouicha <redakerouicha@localhost>
+ * Copyright 2021 RedaKerouicha <redakerouicha@localhost>
  * 
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -14,31 +14,38 @@
  * GNU General Public License for more details.
  * 
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to thBe Free Software
+ * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301, USA.
  * 
  * 
  */
 
-#include "treenode.hpp"
 
 #include <iostream>
+#include <vector>
 
-
+bool kLengthApart(std::vector<int>& nums, int k) {        
+	int p = -1;        
+	for (int i = 0 ; i < (int) nums.size();i++){
+		if(p < 0 && nums[i]){
+			p = i;                
+		}else if(nums[i]){
+			if(i - p <= k)
+				return false;
+			p = i;
+		}
+	}        
+	return true ;
+}
 
 int main(int argc, char **argv)
 {
+	std::vector<int> nums = {0,0,0,0,0,1,0,0,1,0,0,0,1};
+	int k = 2;
+	std::cout << kLengthApart(nums,k) << std::endl;
 	
-	std::vector<int> array;//={1,2,3,4,5};
-	for(int i=0;i<5;++i){
-		array.push_back(i);
-	}
 	
-	TreeNode * root = createTreeNodeFromSortedArray(array);
-	preOrderDisplayIter(root);
-	std::cout<<std::endl;
-
 	return 0;
 }
 
