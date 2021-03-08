@@ -1,7 +1,7 @@
 /*
- * 198_House_Robber.cxx
+ * 1337_The_K_Weakest_Rows_in_a_Matrix.cxx
  * 
- * Copyright 2020 RedaKerouicha <redakerouicha@localhost>
+ * Copyright 2021 RedaKerouicha <redakerouicha@localhost>
  * 
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,16 +23,21 @@
 
 
 #include <iostream>
-
-int rob(vector<int>& nums) {
-	int temp , prec = 0 , solution = 0;
-	for(int i =0; i< nums.size();i++){
-		temp = max(prec + nums[i],solution);
-		prec = solution;
-		solution = temp;
-	}               
-	return solution;        
+vector<int> kWeakestRows(vector<vector<int>>& mat, int k) {        
+	vector<pair<int,int>> vec;
+	vector<int> solution;   
+	for(int i = 0 ; i < mat.size(); i++){    
+		vec.push_back(pair<int,int>{i,accumulate(mat[i].begin(),mat[i].end(),0)});
+	}        
+	sort(vec.begin(),vec.end(),[](pair<int,int> a, pair<int,int> b){
+		return  a.second == b.second ? a.first < b.first : a.second < b.second;
+	});             
+	for(int i = 0; i < k ; i++){
+		solution.push_back(vec[i].first);
+	}        
+	return solution;    
 }
+
 
 int main(int argc, char **argv)
 {

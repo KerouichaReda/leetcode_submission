@@ -1,7 +1,7 @@
 /*
- * 198_House_Robber.cxx
+ * 36_Valid_Sudoku.cxx
  * 
- * Copyright 2020 RedaKerouicha <redakerouicha@localhost>
+ * Copyright 2021 RedaKerouicha <redakerouicha@localhost>
  * 
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,15 +23,28 @@
 
 
 #include <iostream>
+#include <vector>
 
-int rob(vector<int>& nums) {
-	int temp , prec = 0 , solution = 0;
-	for(int i =0; i< nums.size();i++){
-		temp = max(prec + nums[i],solution);
-		prec = solution;
-		solution = temp;
-	}               
-	return solution;        
+bool isValidSudoku(vector<vector<char>>& board) {
+	vector<vector<int>> test;
+	for(int i = 0; i < 9 ; i ++){
+		test = vector<vector<int>>(3,(vector<int>(9)));
+		for(int j = 0; j < 9 ; j++){
+			if(board[i][j] != '.'){
+				if(++test[0][board[i][j]-'1']>1)
+					return false;
+			}
+			if(board[j][i] != '.'){
+				if(++test[1][board[j][i]-'1']>1)
+					return false;
+			}
+			if(board[i/3*3+j/3][i*3%9+j%3] != '.'){
+				if(++test[2][board[((i/3)*3)+j/3][i*3%9+j%3]-'1']>1)
+					return false;
+			}
+		}
+	}
+	return true;
 }
 
 int main(int argc, char **argv)

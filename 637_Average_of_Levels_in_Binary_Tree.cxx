@@ -1,7 +1,7 @@
 /*
- * 198_House_Robber.cxx
+ * 637_Average_of_Levels_in_Binary_Tree.cxx
  * 
- * Copyright 2020 RedaKerouicha <redakerouicha@localhost>
+ * Copyright 2021 RedaKerouicha <redakerouicha@localhost>
  * 
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -24,14 +24,27 @@
 
 #include <iostream>
 
-int rob(vector<int>& nums) {
-	int temp , prec = 0 , solution = 0;
-	for(int i =0; i< nums.size();i++){
-		temp = max(prec + nums[i],solution);
-		prec = solution;
-		solution = temp;
-	}               
-	return solution;        
+void averageOfLevelsUtil(TreeNode* root, int level, vector<pair<long,int>> &tree) {
+	if(root == nullptr){
+		return ;
+	}        
+	if(level >= tree.size()){             
+		tree.push_back(pair<long,int>{});
+	}        
+	tree[level].first += root->val;  
+	tree[level].second++;
+	averageOfLevelsUtil( root->left,  level +1 , tree);
+	averageOfLevelsUtil( root->right,  level +1 , tree);
+}
+vector<double> averageOfLevels(TreeNode* root) {        
+	vector<double> solution;
+	vector<pair<long,int>> tree;
+	averageOfLevelsUtil( root,  0 , tree);
+	for(pair<long,int> p : tree){
+		solution.push_back((double)p.first/p.second);
+	}
+	return solution;
+	
 }
 
 int main(int argc, char **argv)

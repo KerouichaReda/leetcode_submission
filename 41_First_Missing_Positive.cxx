@@ -1,7 +1,7 @@
 /*
- * 198_House_Robber.cxx
+ * 41_First_Missing_Positive.cxx
  * 
- * Copyright 2020 RedaKerouicha <redakerouicha@localhost>
+ * Copyright 2021 RedaKerouicha <redakerouicha@localhost>
  * 
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,16 +23,24 @@
 
 
 #include <iostream>
+#include <unordered_map>
 
-int rob(vector<int>& nums) {
-	int temp , prec = 0 , solution = 0;
-	for(int i =0; i< nums.size();i++){
-		temp = max(prec + nums[i],solution);
-		prec = solution;
-		solution = temp;
-	}               
-	return solution;        
-}
+    int firstMissingPositive(vector<int>& nums) {
+        std::unordered_map<int, int> u;
+        int max=0;
+        for(int n:nums)
+        {
+            u.insert(std::make_pair(n, n));
+            if(n>max)
+                max=n;
+        }
+        for(int i=1;i<=max;i++)
+        {
+            if(u.find(i)==u.end())
+                return i;
+        }
+        return max+1;
+    }
 
 int main(int argc, char **argv)
 {

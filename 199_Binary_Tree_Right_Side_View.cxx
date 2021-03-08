@@ -1,7 +1,7 @@
 /*
- * 198_House_Robber.cxx
+ * 199_Binary_Tree_Right_Side_View.cxx
  * 
- * Copyright 2020 RedaKerouicha <redakerouicha@localhost>
+ * Copyright 2021 RedaKerouicha <redakerouicha@localhost>
  * 
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,17 +23,21 @@
 
 
 #include <iostream>
-
-int rob(vector<int>& nums) {
-	int temp , prec = 0 , solution = 0;
-	for(int i =0; i< nums.size();i++){
-		temp = max(prec + nums[i],solution);
-		prec = solution;
-		solution = temp;
-	}               
-	return solution;        
-}
-
+    vector<int> rightSideView(TreeNode* root) {
+        vector<int> solution;        
+        rightSideViewHelper(root, solution, 0);     
+        return solution;
+    }
+    void rightSideViewHelper(TreeNode* root, vector<int>  &solution, int level = 0 ){
+        if(root == nullptr){
+            return ;
+        }
+       if(solution.size()<=level)
+           solution.push_back(root->val);        
+        rightSideViewHelper(root->right,solution, level +1);
+        rightSideViewHelper(root->left,solution, level +1);
+        
+    } 
 int main(int argc, char **argv)
 {
 	

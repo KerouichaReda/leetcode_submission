@@ -1,7 +1,7 @@
 /*
- * 198_House_Robber.cxx
+ * 1249_Minimum_Remove_to_Make_Valid_Parentheses.cxx
  * 
- * Copyright 2020 RedaKerouicha <redakerouicha@localhost>
+ * Copyright 2021 RedaKerouicha <redakerouicha@localhost>
  * 
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,15 +23,24 @@
 
 
 #include <iostream>
+#include <string>
+#include <stack>
 
-int rob(vector<int>& nums) {
-	int temp , prec = 0 , solution = 0;
-	for(int i =0; i< nums.size();i++){
-		temp = max(prec + nums[i],solution);
-		prec = solution;
-		solution = temp;
-	}               
-	return solution;        
+std::string minRemoveToMakeValid(std::string s) {
+	std::stack<int> st;
+	for (int i = 0; i < s.size(); ++i) {
+		if (s[i] == '(') st.push(i);
+		if (s[i] == ')') {
+		  if (!st.empty()) st.pop();
+		  else s[i] = '*';
+		}
+	}
+	while (!st.empty()) {
+		s[st.top()] = '*';
+		st.pop();
+	}
+	s.erase(std::remove(s.begin(), s.end(), '*'), s.end());
+	return s;
 }
 
 int main(int argc, char **argv)

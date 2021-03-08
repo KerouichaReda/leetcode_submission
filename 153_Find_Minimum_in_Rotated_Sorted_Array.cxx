@@ -1,7 +1,7 @@
 /*
- * 198_House_Robber.cxx
+ * 153_Find_Minimum_in_Rotated_Sorted_Array.cxx
  * 
- * Copyright 2020 RedaKerouicha <redakerouicha@localhost>
+ * Copyright 2021 RedaKerouicha <redakerouicha@localhost>
  * 
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,20 +23,30 @@
 
 
 #include <iostream>
+#include <vector>
 
-int rob(vector<int>& nums) {
-	int temp , prec = 0 , solution = 0;
-	for(int i =0; i< nums.size();i++){
-		temp = max(prec + nums[i],solution);
-		prec = solution;
-		solution = temp;
-	}               
-	return solution;        
+int findMin(std::vector<int>& nums) {
+        int left, right ,mid ;        
+        left = 0;
+        right= nums.size()-1;        
+        while (left < right){
+			if(nums[left]<nums[right])
+				return left;
+            mid = (left + right)/2;
+            if(nums[left]<=nums[mid]){
+                left = mid +1;
+            }
+            else{
+                right = mid;
+            }
+        }        
+        return left;
 }
 
 int main(int argc, char **argv)
 {
-	
+	std::vector<int> nums = {4,5,6,7,8,9,10,11,0,1,2,3};
+	std::cout<<findMin(nums)<<std::endl;
 	return 0;
 }
 

@@ -1,7 +1,7 @@
 /*
- * 198_House_Robber.cxx
+ * 581_Shortest_Unsorted_Continuous_Subarray.cxx
  * 
- * Copyright 2020 RedaKerouicha <redakerouicha@localhost>
+ * Copyright 2021 RedaKerouicha <redakerouicha@localhost>
  * 
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,20 +23,26 @@
 
 
 #include <iostream>
+#include <vector>
+#include <algorithm>
 
-int rob(vector<int>& nums) {
-	int temp , prec = 0 , solution = 0;
-	for(int i =0; i< nums.size();i++){
-		temp = max(prec + nums[i],solution);
-		prec = solution;
-		solution = temp;
-	}               
-	return solution;        
+int findUnsortedSubarray(std::vector<int>& nums) {
+	std::vector<int> vec(nums); //copy vector
+	std::sort(vec.begin(),vec.end());       
+	int left = 0 ,right = nums.size()-1;
+	for(; left <= right ; left++){
+		if(nums[left] != vec[left]) break;
+	}
+	if(left >= right)return 0;        
+	for(; right > 0; right--){            
+		if(nums[right] != vec[right]) break;
+	}
+	return right - left + 1;
 }
-
 int main(int argc, char **argv)
 {
-	
+	std::vector<int> nums = {1,2,3,4,5,7,6};
+	std::cout << findUnsortedSubarray(nums) << std::endl;
 	return 0;
 }
 

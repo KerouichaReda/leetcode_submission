@@ -1,7 +1,7 @@
 /*
- * 198_House_Robber.cxx
+ * 575_Distribute_Candies.cxx
  * 
- * Copyright 2020 RedaKerouicha <redakerouicha@localhost>
+ * Copyright 2021 RedaKerouicha <redakerouicha@localhost>
  * 
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -24,14 +24,9 @@
 
 #include <iostream>
 
-int rob(vector<int>& nums) {
-	int temp , prec = 0 , solution = 0;
-	for(int i =0; i< nums.size();i++){
-		temp = max(prec + nums[i],solution);
-		prec = solution;
-		solution = temp;
-	}               
-	return solution;        
+int distributeCandies(vector<int>& candyType) {        
+	unordered_set<int> s(candyType.begin(),candyType.end());
+	return min(s.size() , candyType.size()/2);
 }
 
 int main(int argc, char **argv)

@@ -1,7 +1,7 @@
 /*
- * 198_House_Robber.cxx
+ * 669_Trim_a_Binary_Search_Tree.cxx
  * 
- * Copyright 2020 RedaKerouicha <redakerouicha@localhost>
+ * Copyright 2021 RedaKerouicha <redakerouicha@localhost>
  * 
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -24,15 +24,14 @@
 
 #include <iostream>
 
-int rob(vector<int>& nums) {
-	int temp , prec = 0 , solution = 0;
-	for(int i =0; i< nums.size();i++){
-		temp = max(prec + nums[i],solution);
-		prec = solution;
-		solution = temp;
-	}               
-	return solution;        
-}
+    TreeNode* trimBST(TreeNode* root, int &low, int &high) {
+        if(root == nullptr)
+            return nullptr;
+        root->left = trimBST(root->left, low, high);
+        root->right =  trimBST(root->right, low, high);
+        
+        return root->val < low ? root->right: root->val > high ? root->left :root;        
+    }
 
 int main(int argc, char **argv)
 {

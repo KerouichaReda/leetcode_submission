@@ -1,7 +1,7 @@
 /*
- * 198_House_Robber.cxx
+ * 645_Set_Mismatch.cxx
  * 
- * Copyright 2020 RedaKerouicha <redakerouicha@localhost>
+ * Copyright 2021 RedaKerouicha <redakerouicha@localhost>
  * 
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,17 +23,20 @@
 
 
 #include <iostream>
+#include <vector>
+#include <unordered_map>
 
-int rob(vector<int>& nums) {
-	int temp , prec = 0 , solution = 0;
-	for(int i =0; i< nums.size();i++){
-		temp = max(prec + nums[i],solution);
-		prec = solution;
-		solution = temp;
-	}               
-	return solution;        
+std::vector<int> findErrorNums(std::vector<int>& nums) {  
+	std::unordered_map<int,int> m;
+	int rep = 0 , miss = 0;
+	for(int element : nums) m[element]++;
+
+	for(int i = 1 ; i < nums.size() + 1  ; i ++){
+		if(m[i] == 0) miss = i;
+		if(m[i] > 1) rep = i;
+	}
+	return {rep,miss};
 }
-
 int main(int argc, char **argv)
 {
 	

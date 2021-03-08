@@ -1,7 +1,7 @@
 /*
- * 198_House_Robber.cxx
+ * 821_Shortest_Distance_to_a_Character.cxx
  * 
- * Copyright 2020 RedaKerouicha <redakerouicha@localhost>
+ * Copyright 2021 RedaKerouicha <redakerouicha@localhost>
  * 
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -24,14 +24,20 @@
 
 #include <iostream>
 
-int rob(vector<int>& nums) {
-	int temp , prec = 0 , solution = 0;
-	for(int i =0; i< nums.size();i++){
-		temp = max(prec + nums[i],solution);
-		prec = solution;
-		solution = temp;
-	}               
-	return solution;        
+vector<int> shortestToChar(string s, char c) {
+unsigned position =  0,previous;
+vector<int> solution;
+for(position = 0;s[position] != c && position <s.size();position++);
+previous = position;
+	for(int i = 0 ; i < s.size() ; i++){ 
+		solution.push_back(position-i<i-previous?position-i:i-previous);
+		if(position-i == 0){
+			previous=position;
+			for(position = i+1;s[position] != c && position <s.size();position++);
+			if(position == s.size()) position = previous;
+		}            
+	}        
+	return solution;
 }
 
 int main(int argc, char **argv)

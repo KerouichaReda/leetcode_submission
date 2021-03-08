@@ -1,7 +1,7 @@
 /*
- * 198_House_Robber.cxx
+ * 22_Generate_Parentheses.cxx
  * 
- * Copyright 2020 RedaKerouicha <redakerouicha@localhost>
+ * Copyright 2021 RedaKerouicha <redakerouicha@localhost>
  * 
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,15 +23,23 @@
 
 
 #include <iostream>
+#include <vector>
+#include <string>
 
-int rob(vector<int>& nums) {
-	int temp , prec = 0 , solution = 0;
-	for(int i =0; i< nums.size();i++){
-		temp = max(prec + nums[i],solution);
-		prec = solution;
-		solution = temp;
-	}               
-	return solution;        
+void generateParenthesisHelper(int &n, int left, int right, std::string str, std::vector<std::string>& solutions) {
+	if (left == n && right == n) {
+		solutions.push_back(str);
+		return;
+	} 
+	if (left < n) 
+		generateParenthesisHelper(n, left + 1, right, str + '(', solutions);
+	if (right < left) 
+		generateParenthesisHelper(n, left, right + 1, str + ')', solutions);
+}
+std::vector<std::string> generateParenthesis(int n) {
+	std::vector<std::string> solutions;    
+	generateParenthesisHelper(n, 0, 0, string{}, solutions);
+	return solutions;
 }
 
 int main(int argc, char **argv)

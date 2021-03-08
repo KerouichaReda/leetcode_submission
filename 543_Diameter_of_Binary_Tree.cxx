@@ -1,7 +1,7 @@
 /*
- * 198_House_Robber.cxx
+ * 543_Diameter_of_Binary_Tree.cxx
  * 
- * Copyright 2020 RedaKerouicha <redakerouicha@localhost>
+ * Copyright 2021 RedaKerouicha <redakerouicha@localhost>
  * 
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -24,15 +24,20 @@
 
 #include <iostream>
 
-int rob(vector<int>& nums) {
-	int temp , prec = 0 , solution = 0;
-	for(int i =0; i< nums.size();i++){
-		temp = max(prec + nums[i],solution);
-		prec = solution;
-		solution = temp;
-	}               
-	return solution;        
+int height(TreeNode* root, int &solution) {
+	if(root == nullptr)
+		return 0;
+	int L = height(root->left, solution);
+	int R = height(root->right, solution);
+	solution = max(solution,L+R+1);
+	return 1 + max(L,R);
 }
+int diameterOfBinaryTree(TreeNode* root) {
+	int solution = 1 ;
+	height(root,solution);
+	return solution - 1;  
+}
+
 
 int main(int argc, char **argv)
 {

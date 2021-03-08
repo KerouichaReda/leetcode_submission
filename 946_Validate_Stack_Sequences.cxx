@@ -1,7 +1,7 @@
 /*
- * 198_House_Robber.cxx
+ * 946_Validate_Stack_Sequences.cxx
  * 
- * Copyright 2020 RedaKerouicha <redakerouicha@localhost>
+ * Copyright 2021 RedaKerouicha <redakerouicha@localhost>
  * 
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,15 +23,19 @@
 
 
 #include <iostream>
+#include <vector>
+#include <stack>
 
-int rob(vector<int>& nums) {
-	int temp , prec = 0 , solution = 0;
-	for(int i =0; i< nums.size();i++){
-		temp = max(prec + nums[i],solution);
-		prec = solution;
-		solution = temp;
-	}               
-	return solution;        
+bool validateStackSequences(std::vector<int> &push, std::vector<int> &pop) {
+	std::stack<int> s;
+	for (unsigned i = 0, j = 0; i < push.size(); ++i) {
+		s.push(push[i]);
+		while (!s.empty() && s.top() == pop[j]) {
+			s.pop();
+			++j;
+		}
+	}
+	return s.empty();
 }
 
 int main(int argc, char **argv)

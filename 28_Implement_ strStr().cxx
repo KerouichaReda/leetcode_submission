@@ -1,7 +1,7 @@
 /*
- * 198_House_Robber.cxx
+ * 28_Implement_ strStr().cxx
  * 
- * Copyright 2020 RedaKerouicha <redakerouicha@localhost>
+ * Copyright 2021 RedaKerouicha <redakerouicha@localhost>
  * 
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,15 +23,27 @@
 
 
 #include <iostream>
+#include <string>
 
-int rob(vector<int>& nums) {
-	int temp , prec = 0 , solution = 0;
-	for(int i =0; i< nums.size();i++){
-		temp = max(prec + nums[i],solution);
-		prec = solution;
-		solution = temp;
-	}               
-	return solution;        
+int strStr(std::string haystack, std::string needle) {
+	if(needle.empty())
+		return 0;
+	if( needle.size() > haystack.size())
+		return -1;
+	bool flag = true;
+	for(int i = 0 ; i < haystack.size()-needle.size()+1;i++)
+		if(haystack[i] == needle[0]){
+			flag = true;
+			for(int j = 1 ;j < needle.size();j++){
+				if(haystack[i+j] != needle[j] ){
+					flag = false;
+					break;
+				}
+			}
+			if(flag)
+				return i;
+			}
+	return -1;        
 }
 
 int main(int argc, char **argv)

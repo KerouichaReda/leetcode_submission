@@ -1,7 +1,7 @@
 /*
- * 198_House_Robber.cxx
+ * 11_Container_With_Most_Water.cxx
  * 
- * Copyright 2020 RedaKerouicha <redakerouicha@localhost>
+ * Copyright 2021 RedaKerouicha <redakerouicha@localhost>
  * 
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,20 +23,28 @@
 
 
 #include <iostream>
+#include <algorithm>
+#include <vector>
 
-int rob(vector<int>& nums) {
-	int temp , prec = 0 , solution = 0;
-	for(int i =0; i< nums.size();i++){
-		temp = max(prec + nums[i],solution);
-		prec = solution;
-		solution = temp;
-	}               
-	return solution;        
+
+int maxArea(std::vector<int>& height) {
+    int area = 0;
+    int i = 0, j = height.size() - 1;
+    int h;
+    while (i < j) {
+        h = std::min(height[i], height[j]);
+        area = std::max(area, (j - i) * h);
+        for(;height[i] <= h && i < j; i++);
+        for(;height[j] <= h && i < j; j--);
+        
+    }
+    return area;
 }
 
 int main(int argc, char **argv)
 {
-	
+	std::vector<int> heights = {4,3,2,1,4};
+	std::cout << maxArea(heights) << std::endl;
 	return 0;
 }
 

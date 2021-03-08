@@ -1,5 +1,5 @@
 /*
- * 198_House_Robber.cxx
+ * 142_Linked_List_Cycle_II.cxx
  * 
  * Copyright 2020 RedaKerouicha <redakerouicha@localhost>
  * 
@@ -24,14 +24,20 @@
 
 #include <iostream>
 
-int rob(vector<int>& nums) {
-	int temp , prec = 0 , solution = 0;
-	for(int i =0; i< nums.size();i++){
-		temp = max(prec + nums[i],solution);
-		prec = solution;
-		solution = temp;
-	}               
-	return solution;        
+bool hasCycle(ListNode *head) {
+	ListNode* walker = head;
+	ListNode* runner = head;
+	
+	while (runner != nullptr){
+		if(runner->next == nullptr){
+			return false;                
+		}
+		runner = runner->next->next;
+		walker = walker->next;
+		if(runner == walker)
+			return true;
+	}
+	return false;        
 }
 
 int main(int argc, char **argv)

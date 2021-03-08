@@ -33,6 +33,7 @@
 #include <iostream>
 #include <algorithm>
 #include <cassert>
+#include <vector>
 
 template<typename E >
 class Heap {
@@ -54,12 +55,19 @@ class Heap {
 	
 	private:
 	E* heap; //Pointer to the Heap<E > array
-	int maxsize; //Maximum size of the Heap<E >
+	int maxsize; //Maximum size of the Heap<E>
 	int n; // number of elements
 	void shiftdown(int pos);
 	bool prior(int a,int b);
 	
 };
+class MinHeap{
+	MinHeap(std::vetor<int> h);
+	private :
+	std::vetor<int> heap;
+	int n ; //number elements
+}
+
 template<typename E>
 Heap<E>::Heap(E* h,int num,int max){
 	heap=h; 

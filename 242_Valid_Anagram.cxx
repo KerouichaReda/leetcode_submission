@@ -1,7 +1,7 @@
 /*
- * 198_House_Robber.cxx
+ * 242_Valid_Anagram.cxx
  * 
- * Copyright 2020 RedaKerouicha <redakerouicha@localhost>
+ * Copyright 2021 RedaKerouicha <redakerouicha@localhost>
  * 
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,15 +23,14 @@
 
 
 #include <iostream>
+#include <string>
+#include <algorithm>
 
-int rob(vector<int>& nums) {
-	int temp , prec = 0 , solution = 0;
-	for(int i =0; i< nums.size();i++){
-		temp = max(prec + nums[i],solution);
-		prec = solution;
-		solution = temp;
-	}               
-	return solution;        
+bool isAnagram(string s, string t) {
+	std::vector<int> vs(26),vt(26);
+	for(char c : s) vs[c-'a']++;
+	for(char c : t) vt[c-'a']++;
+	return std::equal(vs.begin(),vs.end(),vt.begin());
 }
 
 int main(int argc, char **argv)

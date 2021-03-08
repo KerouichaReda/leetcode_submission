@@ -1,7 +1,7 @@
 /*
- * 198_House_Robber.cxx
+ * 413_Arithmetic_Slices.cxx
  * 
- * Copyright 2020 RedaKerouicha <redakerouicha@localhost>
+ * Copyright 2021 RedaKerouicha <redakerouicha@localhost>
  * 
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,15 +23,18 @@
 
 
 #include <iostream>
-
-int rob(vector<int>& nums) {
-	int temp , prec = 0 , solution = 0;
-	for(int i =0; i< nums.size();i++){
-		temp = max(prec + nums[i],solution);
-		prec = solution;
-		solution = temp;
-	}               
-	return solution;        
+int numberOfArithmeticSlices(vector<int>& A) {
+	if(A.empty()) return 0;
+	
+	int count,solution = 0;
+	for(int i = 0 ; i < A.size()-1;i++){
+		count = 0;            
+		for(int j = i + 1,k = A[j]-A[j-1]; j < A.size() && A[j-1]+k == A[j] ;j++){
+			count++;
+			solution += count>=2;        
+		}
+	}
+	return solution;
 }
 
 int main(int argc, char **argv)

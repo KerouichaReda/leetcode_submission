@@ -1,7 +1,7 @@
 /*
- * 198_House_Robber.cxx
+ * 138_Copy_List_with_Random_Pointer.cxx
  * 
- * Copyright 2020 RedaKerouicha <redakerouicha@localhost>
+ * Copyright 2021 RedaKerouicha <redakerouicha@localhost>
  * 
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,15 +23,41 @@
 
 
 #include <iostream>
+#include <unordored_map>
+struct Node {
 
-int rob(vector<int>& nums) {
-	int temp , prec = 0 , solution = 0;
-	for(int i =0; i< nums.size();i++){
-		temp = max(prec + nums[i],solution);
-		prec = solution;
-		solution = temp;
-	}               
-	return solution;        
+    int val;
+    Node* next;
+    Node* random;
+    
+    Node(int _val) {
+        val = _val;
+        next = nullptr;
+        random = nullptr;
+    }
+};
+
+Node* copyRandomList(Node* head) {
+	if(head == nullptr)
+		return nullptr;
+	std::unordered_map<Node*,Node*> m;
+	Node* p = head;
+	Node* newHead = new Node(0);
+	Node* t = newHead;
+	while(p != nullptr){
+		t->next = new Node(p->val);
+		m[p] = t->next;
+		t= t->next;
+		p=p->next;            
+	}
+	t=newHead->next;
+	p=head;
+	while(p!=nullptr){
+		t->random = m[p->random];
+		t = t->next;
+		p = p->next;
+	}
+	return newHead->next;
 }
 
 int main(int argc, char **argv)

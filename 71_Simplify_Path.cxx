@@ -1,7 +1,7 @@
 /*
- * 198_House_Robber.cxx
+ * 71_Simplify_Path.cxx
  * 
- * Copyright 2020 RedaKerouicha <redakerouicha@localhost>
+ * Copyright 2021 RedaKerouicha <redakerouicha@localhost>
  * 
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -24,15 +24,24 @@
 
 #include <iostream>
 
-int rob(vector<int>& nums) {
-	int temp , prec = 0 , solution = 0;
-	for(int i =0; i< nums.size();i++){
-		temp = max(prec + nums[i],solution);
-		prec = solution;
-		solution = temp;
-	}               
-	return solution;        
-}
+string simplifyPath(string path) {
+	vector <string> tokens; 
+	string intermediate,solution;       
+	stringstream check(path); 
+	while(getline(check, intermediate, '/')){       
+		if(intermediate == ".."){
+		   if(!tokens.empty()) tokens.pop_back();}
+		else if (intermediate == "."){
+			continue;
+		}else if(intermediate != "") {
+			tokens.push_back(intermediate);
+		}     
+	}
+	for(string s :tokens){
+		solution += "/" + s;
+	}
+	return tokens.empty() ? "/": solution;
+}    
 
 int main(int argc, char **argv)
 {

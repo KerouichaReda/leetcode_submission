@@ -1,7 +1,7 @@
 /*
- * 198_House_Robber.cxx
+ * 1680_Concatenation_of_Consecutive_Binary_Numbers.cxx
  * 
- * Copyright 2020 RedaKerouicha <redakerouicha@localhost>
+ * Copyright 2021 RedaKerouicha <redakerouicha@localhost>
  * 
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,19 +23,27 @@
 
 
 #include <iostream>
-
-int rob(vector<int>& nums) {
-	int temp , prec = 0 , solution = 0;
-	for(int i =0; i< nums.size();i++){
-		temp = max(prec + nums[i],solution);
-		prec = solution;
-		solution = temp;
-	}               
-	return solution;        
+int concatenatedBinary(int n) {
+	long  result = 0 ;
+	int temp ;  
+		for (int i = 1 , bitl ; i <= n ; i++){
+			temp = i;
+			bitl = 0;
+			while(temp > 0){            
+				bitl++ ;            
+				temp >>=  1;            
+			}
+		result = ((result << bitl) %  1000000007 ) + i;
+		}
+	return result ;
 }
+
 
 int main(int argc, char **argv)
 {
+	//int n = 5000;
+	for(int n = 1; n <500 ;n++)
+	std::cout << concatenatedBinary(n) << std::endl; 
 	
 	return 0;
 }

@@ -1,7 +1,7 @@
 /*
- * 198_House_Robber.cxx
+ * 20_Valid_Parentheses.cxx
  * 
- * Copyright 2020 RedaKerouicha <redakerouicha@localhost>
+ * Copyright 2021 RedaKerouicha <redakerouicha@localhost>
  * 
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,15 +23,21 @@
 
 
 #include <iostream>
+#include <string>
 
-int rob(vector<int>& nums) {
-	int temp , prec = 0 , solution = 0;
-	for(int i =0; i< nums.size();i++){
-		temp = max(prec + nums[i],solution);
-		prec = solution;
-		solution = temp;
-	}               
-	return solution;        
+bool isValid(std::string s) {
+	// support variables
+	char arr[s.size()];
+	int pos = 0;
+	for (char c: s) {
+		if (c == '(' || c == '[' || c == '{') {
+			arr[pos++] = c;
+		}
+		else if (pos && abs(arr[pos - 1] - c) < 3) pos--;
+		else return false;
+	}
+	// checking if all the parentheses are now 0
+	return !pos;
 }
 
 int main(int argc, char **argv)

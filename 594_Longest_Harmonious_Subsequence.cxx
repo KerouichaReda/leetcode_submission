@@ -1,7 +1,7 @@
 /*
- * 198_House_Robber.cxx
+ * 594_Longest_Harmonious_Subsequence.cxx
  * 
- * Copyright 2020 RedaKerouicha <redakerouicha@localhost>
+ * Copyright 2021 RedaKerouicha <redakerouicha@localhost>
  * 
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -24,15 +24,17 @@
 
 #include <iostream>
 
-int rob(vector<int>& nums) {
-	int temp , prec = 0 , solution = 0;
-	for(int i =0; i< nums.size();i++){
-		temp = max(prec + nums[i],solution);
-		prec = solution;
-		solution = temp;
-	}               
-	return solution;        
-}
+    int findLHS(vector<int>& nums) {
+        unordered_map<int,int> m;
+        int solution = 0;
+        for(int n : nums) m[n]++;
+        for(pair<int,int> p : m){            
+            if(m.find(p.first+1) != m.end())
+                solution = max(solution,p.second+m[p.first+1]);
+        }
+        
+        return solution;
+    }
 
 int main(int argc, char **argv)
 {

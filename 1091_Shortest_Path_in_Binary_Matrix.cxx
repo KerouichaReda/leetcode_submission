@@ -1,7 +1,7 @@
 /*
- * 198_House_Robber.cxx
+ * 1091_Shortest_Path_in_Binary_Matrix.cxx
  * 
- * Copyright 2020 RedaKerouicha <redakerouicha@localhost>
+ * Copyright 2021 RedaKerouicha <redakerouicha@localhost>
  * 
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -24,14 +24,26 @@
 
 #include <iostream>
 
-int rob(vector<int>& nums) {
-	int temp , prec = 0 , solution = 0;
-	for(int i =0; i< nums.size();i++){
-		temp = max(prec + nums[i],solution);
-		prec = solution;
-		solution = temp;
-	}               
-	return solution;        
+int shortestPathBinaryMatrix(vector<vector<int>>& g, int steps = 0) {
+  queue<pair<int, int>> q;
+  q.push({ 0, 0 });
+  while (!q.empty()) {
+    ++steps;
+    queue<pair<int, int>> q1;
+    while (!q.empty()) {
+      auto c = q.front();
+      q.pop();
+      if (c.first >= 0 && c.second >= 0 && c.first < g.size() && c.second < g.size() && !g[c.first][c.second]) {
+        g[c.first][c.second] = 1;
+        if (c.first == g.size() - 1 && c.second == g.size() - 1) return steps;
+        for (auto i = -1; i < 2; ++i)
+          for (auto j = -1; j < 2; ++j)
+            if (i != 0 || j != 0) q1.push({ c.first + i, c.second + j });
+      }
+    }
+    swap(q, q1);
+  }
+  return -1;
 }
 
 int main(int argc, char **argv)
