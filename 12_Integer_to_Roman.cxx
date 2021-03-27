@@ -26,7 +26,7 @@
 
 class Solution {
 public:
-    string intToRoman(unsigned int  value) 
+    string intToRoman(unsigned int value) 
     {
     struct romandata_t { unsigned int value; char const* numeral; };
     const struct romandata_t romandata[] =

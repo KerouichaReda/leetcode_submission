@@ -265,7 +265,7 @@ int getNodeLevel(TreeNode* root,TreeNode* target,int level=1){
 }
 
 int getNodeLevel(TreeNode* root,int target,int level=1){
-	if(root !=nullptr){
+	if(root != nullptr){
 		if(root->val==target){
 			return level;
 		}
