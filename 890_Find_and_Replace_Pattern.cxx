@@ -1,7 +1,7 @@
 /*
- * 112_Path_Sum.cxx
+ * 890_Find_and_Replace_Pattern.cxx
  * 
- * Copyright 2020 RedaKerouicha <redakerouicha@localhost>
+ * Copyright 2021 RedaKerouicha <redakerouicha@localhost>
  * 
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,14 +23,27 @@
 
 
 #include <iostream>
-#include "treenode.hpp"
+#include <vector>
 
-    bool hasPathSum(TreeNode* root, int targetSum) {
-        if(root == nullptr) return false;
-        if(targetSum == root->val && root->left == nullptr && root->right == nullptr) return true;
-        return hasPathSum(root->left , targetSum - root->val) || hasPathSum(root->right , targetSum - root->val) ;
-    }
-
+vector<string> findAndReplacePattern(vector<string>& words, string p) {
+	vector<string> solution;        
+	for(string w : words){
+		unordered_map<char,char> word_to_pat;
+		unordered_map<char,char> pat_to_word;
+		int i;
+		for(i = 0 ; i < p.size() ;++i ){
+			if(!word_to_pat.count(w[i]) && !pat_to_word.count(p[i])){
+				word_to_pat[w[i]]=p[i];
+				pat_to_word[p[i]]=w[i];
+			}else if(word_to_pat[w[i]] != p[i] || pat_to_word[p[i]] != w[i]){
+				break;
+			}                
+		}
+		if(i==w.size())
+		solution.push_back(w);
+	}
+	return solution;
+}
 int main(int argc, char **argv)
 {
 	

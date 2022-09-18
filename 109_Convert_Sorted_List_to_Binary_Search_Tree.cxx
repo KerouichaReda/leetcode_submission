@@ -1,7 +1,7 @@
 /*
- * 112_Path_Sum.cxx
+ * 109_Convert_Sorted_List_to_Binary_Search_Tree.cxx
  * 
- * Copyright 2020 RedaKerouicha <redakerouicha@localhost>
+ * Copyright 2021 RedaKerouicha <redakerouicha@localhost>
  * 
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,12 +23,24 @@
 
 
 #include <iostream>
-#include "treenode.hpp"
 
-    bool hasPathSum(TreeNode* root, int targetSum) {
-        if(root == nullptr) return false;
-        if(targetSum == root->val && root->left == nullptr && root->right == nullptr) return true;
-        return hasPathSum(root->left , targetSum - root->val) || hasPathSum(root->right , targetSum - root->val) ;
+    TreeNode* sortedListToBST(ListNode* head,ListNode* tail = nullptr ) {        
+        if(head == tail){
+            return nullptr;
+        }
+        
+        ListNode* slow = head;
+        ListNode* fast = head;
+        
+        while(fast != tail && fast->next != tail ){
+            slow = slow->next;
+            fast= fast->next->next;
+        }
+        TreeNode* root = new TreeNode(slow->val);
+        root->left = sortedListToBST(head,slow) ;
+        root->right = sortedListToBST(slow->next,tail) ;
+        
+        return root;        
     }
 
 int main(int argc, char **argv)

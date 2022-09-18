@@ -1,7 +1,7 @@
 /*
- * 112_Path_Sum.cxx
+ * 114_Flatten_Binary_Tree_to_Linked_List.cxx
  * 
- * Copyright 2020 RedaKerouicha <redakerouicha@localhost>
+ * Copyright 2021 RedaKerouicha <redakerouicha@localhost>
  * 
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,12 +23,26 @@
 
 
 #include <iostream>
-#include "treenode.hpp"
 
-    bool hasPathSum(TreeNode* root, int targetSum) {
-        if(root == nullptr) return false;
-        if(targetSum == root->val && root->left == nullptr && root->right == nullptr) return true;
-        return hasPathSum(root->left , targetSum - root->val) || hasPathSum(root->right , targetSum - root->val) ;
+    void flatten(TreeNode* root) {
+        if(root == nullptr){
+            return ;
+        }
+        vector<TreeNode*> vec;
+        flatten_helper(root, vec);        
+        for(int i = 0 ; i < vec.size()-1; i++){
+            vec[i]->left = nullptr;
+            vec[i]->right = vec[i+1];
+        }
+    }
+    
+    void flatten_helper(TreeNode* root,vector<TreeNode*> &vec){
+        if(root == nullptr){
+            return ;
+        }
+        vec.push_back(root);
+        flatten_helper(root->left, vec);
+        flatten_helper(root->right, vec);        
     }
 
 int main(int argc, char **argv)

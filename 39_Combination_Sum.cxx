@@ -1,7 +1,7 @@
 /*
- * 1_Two_Sum.cxx
+ * 39_Combination_Sum.cxx
  * 
- * Copyright 2020 RedaKerouicha <redakerouicha@localhost>
+ * Copyright 2021 RedaKerouicha <redakerouicha@localhost>
  * 
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,33 +19,31 @@
  * MA 02110-1301, USA.
  * 
  * 
- * 
- * https://leetcode.com/problems/two-sum/
  */
 
 
 #include <iostream>
-#include <vector>
-#include <unordered_map>
- std::vector<int> twoSum(std::vector<int>& nums, int target) {
-        std::unordered_map<int, int> m;
-        int n = nums.size();
-        for(int i=0;i<n;i++)
-            m.insert({nums[i], i});
-        
-        std::vector<int> ans;
-        
-        for(int i=0;i<n;i++){
-            int check = target - nums[i];
-            if(m.find(check) != m.end()){
-                if(m[check] != i){
-                    ans.push_back(i);
-                    ans.push_back(m[check]);
-                    break;
-                }
-            }
+
+    void combinationSum(vector<int>& candidates,vector<int> &temp, int target,int index, vector<vector<int>> &solution) {
+        if(target == 0 ) {
+            solution.push_back(temp);
+            return ;
         }
-        return ans;
+        if(target < 0) return ;
+        
+        for(int i = index ; i <  candidates.size() ; ++i){            
+            temp.push_back(candidates[i]);
+            int reminder = target - candidates[i];
+            combinationSum(candidates,temp,reminder,i ,solution);
+            temp.pop_back();
+        }
+        
+    }
+    vector<vector<int>> combinationSum(vector<int>& candidates, int target) {
+        vector<vector<int>> solution;
+        vector<int> temp;
+        combinationSum(candidates,temp,  target ,0,solution);
+        return solution;
     }
 
 int main(int argc, char **argv)
@@ -53,5 +51,4 @@ int main(int argc, char **argv)
 	
 	return 0;
 }
-
 

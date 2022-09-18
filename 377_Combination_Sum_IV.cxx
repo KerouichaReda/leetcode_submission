@@ -1,7 +1,7 @@
 /*
- * 112_Path_Sum.cxx
+ * 377_Combination_Sum_IV.cxx
  * 
- * Copyright 2020 RedaKerouicha <redakerouicha@localhost>
+ * Copyright 2021 RedaKerouicha <redakerouicha@localhost>
  * 
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,13 +23,26 @@
 
 
 #include <iostream>
-#include "treenode.hpp"
+class Solution {
+public:
+    int combinationSum4(vector<int>& nums, int target) {
+        if(target == 0)  return 1;
+        if(target < 0)  return 0;
+        if(memo.count(target))  return memo[target];
 
-    bool hasPathSum(TreeNode* root, int targetSum) {
-        if(root == nullptr) return false;
-        if(targetSum == root->val && root->left == nullptr && root->right == nullptr) return true;
-        return hasPathSum(root->left , targetSum - root->val) || hasPathSum(root->right , targetSum - root->val) ;
+        int solution = 0; 
+        
+        for(int e : nums){
+            int rest  = target - e;
+            solution += combinationSum4( nums, rest);
+        }
+        memo[target] = solution;
+        return solution;
     }
+    
+private :
+    unordered_map<int,int> memo;
+};
 
 int main(int argc, char **argv)
 {

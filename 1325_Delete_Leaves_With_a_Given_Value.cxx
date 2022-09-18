@@ -1,7 +1,7 @@
 /*
- * 112_Path_Sum.cxx
+ * 1325_Delete_Leaves_With_a_Given_Value.cxx
  * 
- * Copyright 2020 RedaKerouicha <redakerouicha@localhost>
+ * Copyright 2021 RedaKerouicha <redakerouicha@localhost>
  * 
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,14 +23,22 @@
 
 
 #include <iostream>
-#include "treenode.hpp"
-
-    bool hasPathSum(TreeNode* root, int targetSum) {
-        if(root == nullptr) return false;
-        if(targetSum == root->val && root->left == nullptr && root->right == nullptr) return true;
-        return hasPathSum(root->left , targetSum - root->val) || hasPathSum(root->right , targetSum - root->val) ;
-    }
-
+TreeNode* removeLeafNodes(TreeNode* root,const int &target) {
+	if(root == nullptr){
+		root = nullptr;
+	}else  {
+		if(root->left != nullptr){                
+			root->left = removeLeafNodes(root->left, target);
+		}            
+		if(root->right != nullptr){
+			root->right = removeLeafNodes(root->right, target);            
+		}
+	}
+	return isLeaf(root,target) ? nullptr : root;        
+}    
+constexpr bool isLeaf(TreeNode* root,const int &target){
+	return root == nullptr ? false : root->left == nullptr && root->right == nullptr && root->val == target;
+}
 int main(int argc, char **argv)
 {
 	

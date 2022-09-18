@@ -1,7 +1,7 @@
 /*
- * 112_Path_Sum.cxx
+ * 701_Insert_into_a_Binary_Search_Tree.cxx
  * 
- * Copyright 2020 RedaKerouicha <redakerouicha@localhost>
+ * Copyright 2021 RedaKerouicha <redakerouicha@localhost>
  * 
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,14 +23,18 @@
 
 
 #include <iostream>
-#include "treenode.hpp"
-
-    bool hasPathSum(TreeNode* root, int targetSum) {
-        if(root == nullptr) return false;
-        if(targetSum == root->val && root->left == nullptr && root->right == nullptr) return true;
-        return hasPathSum(root->left , targetSum - root->val) || hasPathSum(root->right , targetSum - root->val) ;
+    TreeNode* insertIntoBST(TreeNode* root, int val) {
+        if(root == nullptr){
+            root = new TreeNode(val);
+        }
+        else if (val < root->val){
+            root->left = insertIntoBST(root->left,  val);
+        }
+        else {
+            root->right = insertIntoBST(root->right,  val);
+        }            
+        return root;        
     }
-
 int main(int argc, char **argv)
 {
 	

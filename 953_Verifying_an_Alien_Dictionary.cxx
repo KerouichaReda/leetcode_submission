@@ -1,7 +1,7 @@
 /*
- * 112_Path_Sum.cxx
+ * 953_Verifying_an_Alien_Dictionary.cxx
  * 
- * Copyright 2020 RedaKerouicha <redakerouicha@localhost>
+ * Copyright 2021 RedaKerouicha <redakerouicha@localhost>
  * 
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,13 +23,32 @@
 
 
 #include <iostream>
-#include "treenode.hpp"
 
-    bool hasPathSum(TreeNode* root, int targetSum) {
-        if(root == nullptr) return false;
-        if(targetSum == root->val && root->left == nullptr && root->right == nullptr) return true;
-        return hasPathSum(root->left , targetSum - root->val) || hasPathSum(root->right , targetSum - root->val) ;
-    }
+bool isAlienSorted(vector<string>& words, string order) {
+	unordered_map<char,int> m;
+	for (int i = 0; i <  order.size();i++){
+		m[order[i]]=i;
+	}
+	
+	for(int i = 0; i < words.size()-1;i++ ){
+		if(!compare(words[i],words[i+1],m)){
+			return false;
+		}
+	}
+	return true;
+	
+}
+bool compare(string a , string b , unordered_map<char,int> m){
+	int i;
+		for(i = 0 ; i < a.size() && i < b.size() ; i++){
+			if(m[a[i]]<m[b[i]]){
+				return true;
+			}else if(m[a[i]] > m[b[i]]){
+				return false;
+			}
+		}
+	return i == a.size();
+}
 
 int main(int argc, char **argv)
 {

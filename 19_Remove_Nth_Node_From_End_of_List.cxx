@@ -1,7 +1,7 @@
 /*
- * 112_Path_Sum.cxx
+ * 19_Remove_Nth_Node_From_End_of_List.cxx
  * 
- * Copyright 2020 RedaKerouicha <redakerouicha@localhost>
+ * Copyright 2021 RedaKerouicha <redakerouicha@localhost>
  * 
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,13 +23,29 @@
 
 
 #include <iostream>
-#include "treenode.hpp"
 
-    bool hasPathSum(TreeNode* root, int targetSum) {
-        if(root == nullptr) return false;
-        if(targetSum == root->val && root->left == nullptr && root->right == nullptr) return true;
-        return hasPathSum(root->left , targetSum - root->val) || hasPathSum(root->right , targetSum - root->val) ;
-    }
+ListNode* removeNthFromEnd(ListNode* head, int n) {
+	ListNode *p1(head), *p2(head),*p3( head) ;
+	int size = 0 ,count = n;
+	while(p2 != nullptr){
+		if(count > 0){
+			count--;
+		}else{
+			p3 = p1;
+			p1 = p1->next; 
+		}
+		p2 = p2->next;
+		size++;
+	}
+	if(size == n)
+		return head->next;  
+
+	if(p1->next != nullptr)
+		*p1 =  *p1->next;
+	else
+		p3->next = nullptr;         
+	return head;        
+}
 
 int main(int argc, char **argv)
 {

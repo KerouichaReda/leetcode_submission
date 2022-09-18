@@ -1,7 +1,7 @@
 /*
- * 112_Path_Sum.cxx
+ * 1160_Find_Words_That_Can_Be_Formed_by_Characters.cxx
  * 
- * Copyright 2020 RedaKerouicha <redakerouicha@localhost>
+ * Copyright 2021 RedaKerouicha <redakerouicha@localhost>
  * 
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,12 +23,30 @@
 
 
 #include <iostream>
-#include "treenode.hpp"
 
-    bool hasPathSum(TreeNode* root, int targetSum) {
-        if(root == nullptr) return false;
-        if(targetSum == root->val && root->left == nullptr && root->right == nullptr) return true;
-        return hasPathSum(root->left , targetSum - root->val) || hasPathSum(root->right , targetSum - root->val) ;
+    int countCharacters(vector<string>& words, string chars) {
+        vector<int> freq = count(chars);
+        int solution = 0;
+        for(string w : words){
+            vector<int> temp = count(w);
+            int i ;
+            for(i = 0 ; i<26;i++){
+                if(freq[i]<temp[i]) break;
+            }
+            if( i == 26){
+                solution += w.size();
+            }
+        }
+        
+        return solution;
+    }
+    
+    vector<int> count(string s){
+        vector<int> freq(26);
+        for(char c : s){
+            freq[c-'a']++;
+        }
+        return freq;
     }
 
 int main(int argc, char **argv)

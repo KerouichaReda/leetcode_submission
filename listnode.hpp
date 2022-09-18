@@ -45,14 +45,14 @@ ListNode * createListFromArray(std::vector<int> array){
 	ListNode *lastNode	= nullptr;
 	
 	int length=(int)array.size();
-	for(int i=0;i<length;++i){
+	for(int i = 0 ; i < length; ++i){
 		if(ptrNode==nullptr){
 			ptrNode = new ListNode(array[i]);
-			if(rootNode==nullptr){
-				rootNode=ptrNode;
+			if(rootNode == nullptr){
+				rootNode = ptrNode;
 			}
-			if(lastNode!=nullptr){
-				lastNode->next=ptrNode;
+			if(lastNode != nullptr){
+				lastNode->next = ptrNode;
 			}			
 		}
 		lastNode =	ptrNode;

@@ -1,7 +1,7 @@
 /*
- * 112_Path_Sum.cxx
+ * 554_Brick_Wall.cxx
  * 
- * Copyright 2020 RedaKerouicha <redakerouicha@localhost>
+ * Copyright 2021 RedaKerouicha <redakerouicha@localhost>
  * 
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -23,13 +23,20 @@
 
 
 #include <iostream>
-#include "treenode.hpp"
 
-    bool hasPathSum(TreeNode* root, int targetSum) {
-        if(root == nullptr) return false;
-        if(targetSum == root->val && root->left == nullptr && root->right == nullptr) return true;
-        return hasPathSum(root->left , targetSum - root->val) || hasPathSum(root->right , targetSum - root->val) ;
+int leastBricks(vector<vector<int>>& wall) {
+    unordered_map<int, int> edges;
+    int min_bricks = wall.size();
+    for (vector<int>row : wall){
+        for (int i = 0, width = 0; i < row.size() - 1; ++i){ // skip last brick
+            width += row[i];
+            edges[width]++;
+            int rows =  wall.size() - edges[width];
+            min_bricks = std::min(min_bricks, rows);
+        }
     }
+    return min_bricks;
+}
 
 int main(int argc, char **argv)
 {
