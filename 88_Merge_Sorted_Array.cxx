@@ -1,44 +1,26 @@
-/*
- * 88_Merge_Sorted_Array.cxx
- * 
- * Copyright 2021 RedaKerouicha <redakerouicha@localhost>
- * 
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- * 
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- * 
- * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
- * MA 02110-1301, USA.
- * 
- * 
- */
-
-
 #include <iostream>
 #include <vector>
 
-    void merge(vector<int>& nums1, int m, vector<int>& nums2, int n) {
-        
-        if(n>0){
-        for(int i = 0;i<n ; i++){
-            nums1[m+i]=nums2[i];
-        }
-        
-        std::sort(nums1.begin(),nums1.end());
-        }
+void merge(std::vector<int>& nums1, int m, std::vector<int>& nums2, int n) {
+    // reduce m and n by 1 to be used as a merging indexes
+    for (int i = --m + --n + 1; i >= 0; --i) {
+        nums1[i] = m < 0 ? nums2[n--] : n < 0 ? nums1[m--] : nums1[m] > nums2[n]
+                                                                 ? nums1[m--]
+                                                                 : nums2[n--];
     }
-
-int main(int argc, char **argv)
-{
-	
-	return 0;
 }
 
+void merge(std::vector<int>& nums1, int m, std::vector<int>& nums2, int n) {
+    for (int i = --m + --n + 1; n >= 0; --i) {
+        nums1[i] =
+            m < 0 ? nums2[n--] : nums1[m] > nums2[n] ? nums1[m--] : nums2[n--];
+    }
+}
+int main(int argc, char const* argv[]) {
+    std::vector<int> nums1 = {1, 2, 3, 0, 0, 0};
+    int m = 3;
+    std::vector<int> nums2 = {4, 5, 6};
+    int n = 3;
+    merge(nums1, m, nums2, n);
+    return 0;
+}

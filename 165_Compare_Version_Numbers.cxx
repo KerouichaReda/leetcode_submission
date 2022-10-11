@@ -1,58 +1,37 @@
-/*
- * 165_Compare_Version_Numbers.cxx
- * 
- * Copyright 2020 RedaKerouicha <redakerouicha@localhost>
- * 
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 2 of the License, or
- * (at your option) any later version.
- * 
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- * 
- * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
- * MA 02110-1301, USA.
- * 
- * 
- */
-
-
 #include <iostream>
+#include <sstream>
+#include <queue>
+#include <string>
 
-
-    int compareVersion(string version1, string version2) 
-    {
-    std::replace( version1.begin(), version1.end(), '.', ' ');
-    std::replace( version2.begin(), version2.end(), '.', ' ');
-    istringstream s1(version1), s2(version2);
-    while(1) 
-    {
-        int n1,n2;
-        if (!(s1 >> n1) ) 
-            n1 = 0;
-        
-        if (!(s2 >> n2) ) 
-            n2 = 0;
-        
-        if (! s1 && ! s2) 
-            return 0;
-        
-        if (n1<n2) 
-            return -1;
-        
-        if (n1>n2) 
-            return 1;
+int compareVersion(std::string version1, std::string version2){
+    std::queue<int> v1,v2; 
+    std::stringstream s1(version1), s2(version2);
+    std::string inter;
+    while(getline(s1,inter,'.')){
+        v1.push(stoi(inter));
     }
-}
-    
-int main(int argc, char **argv)
-{
-	
-	return 0;
+    while(getline(s2,inter,'.')){
+        v2.push(stoi(inter));
+    }
+    while (!v1.empty() || !v2.empty()){
+        int temp1 = v1.empty() ? 0 : v1.front();
+        if(!v1.empty()) v1.pop();
+        int temp2 = v2.empty() ? 0 : v2.front();
+        if(!v2.empty()) v2.pop();
+        if (temp1 > temp2){
+            return  1;
+        }else if (temp1 < temp2){
+            return -1;
+        }        
+    }
+    return 0;
 }
 
+int main(int argc, char const *argv[]){
+    std::string version1 = "1.0.0.1";
+    std::string version2 = "1.0.1";
+
+    std::cout<<compareVersion(version1,version2) <<std::endl;
+    /* code */
+    return 0;
+}
