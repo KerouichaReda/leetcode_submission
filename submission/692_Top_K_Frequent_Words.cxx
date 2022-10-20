@@ -5,13 +5,13 @@
 #include <algorithm>
 
 std::vector<std::string> topKFrequent(std::vector<std::string>& words, int k) {
-    std::unordered_map<std::string, int> u;
+    std::unordered_map<std::string, int> m;
     std::vector<std::string> solution;
-    for (std::std::string w : words) {
+    for (std::string w : words) {
         u[w]++;
     }
     std::vector<std::pair<std::string, int>> hist;
-    for (std::pair<std::string, int> h : u) {
+    for (std::pair<std::string, int> h : m) {
         hist.push_back(h);
     }
     std::sort(hist.begin(), hist.end(), [](std::pair<std::string, int> a,
