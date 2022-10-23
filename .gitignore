@@ -4,8 +4,9 @@
 # Unignore all with extensions
 !*.*
 *~
-
+.vscode
 !Documentation/
+!submission/
 
 # Prerequisites
 *.d
