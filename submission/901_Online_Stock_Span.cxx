@@ -3,7 +3,6 @@
 class StockSpanner {
    public:
     StockSpanner() {}
-
     int next(int price) {
         prices_.push_back(price);
         int temp{0};
@@ -15,10 +14,9 @@ class StockSpanner {
 
    private:
     std::vector<int> prices_;
-}
+};
 
-int main(int argc, char const *argv[])
-{
+int main(int argc, char const* argv[]) {
     /* code */
     return 0;
 }
