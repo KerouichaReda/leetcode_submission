@@ -1,5 +1,5 @@
 /*
- * 283_Move_Zeroes.cxx
+ * 2460_Apply_Operations_to_an_Array.cxx
  * 
  * Copyright 2022 RedaKerouicha <redakerouicha@localhost>
  * 
@@ -24,19 +24,27 @@
 
 #include <iostream>
 #include <vector>
-void moveZeroes(std::vector<int>& nums) {
+
+std::vector<int> applyOperations(std::vector<int>& nums) {
+	for(int i = 0 , size = nums.size() - 1 ; i < size ; i++){
+		if(nums[i] == nums[i+1]){
+			nums[i] *= 2;
+			nums[i + 1 ] = 0;
+		}            
+	}
 	int index{0};
 	for(int& n : nums){
 		if(n) nums[index++] = n; 
 	}
-	for(int size = nums.size() ; index <size ; index++){
+	for(int size = nums.size() ; index < size ; index++){
 		nums[index] = 0;
 	}
+	return nums;        
 }
 int main(int argc, char **argv)
 {
-	std::vector<int> nums = {0,1,0,3,12};
-	moveZeroes(nums);g
+	std::vector<int> nums = {1,2,2,1,1,0};
+	std::vector<int> vec = applyOperations(nums);
 	return 0;
 }
 
