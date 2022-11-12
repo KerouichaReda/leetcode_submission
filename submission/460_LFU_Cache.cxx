@@ -78,7 +78,7 @@ private:
 
 int main(int argc, char **argv)
 {
-	LFUCache(5);
+	LFUCache lfu(5);
 	return 0;
 }
 
