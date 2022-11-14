@@ -83,20 +83,18 @@ void preOrderDisplay(TreeNode* root) {
 }
 
 void inOrderDisplay(TreeNode* root) {
-    if (root != nullptr) {
-        inOrderDisplay(root->left);
-        std::cout << root->val << " ";
-        inOrderDisplay(root->right);
-        ;
-    }
+    if (root == nullptr) return;
+    inOrderDisplay(root->left);
+    std::cout << root->val << " ";
+    inOrderDisplay(root->right);
 }
 
 void postOrderDisplay(TreeNode* root) {
-    if (root != nullptr) {
-        postOrderDisplay(root->left);
-        postOrderDisplay(root->right);
-        std::cout << root->val << " ";
-    }
+    if (root == nullptr) return;
+
+    postOrderDisplay(root->left);
+    postOrderDisplay(root->right);
+    std::cout << root->val << " ";
 }
 
 TreeNode* createTreeNodeFromSortedArrayUtil(std::vector<int>& array, int start,
@@ -117,10 +115,8 @@ TreeNode* createTreeNodeFromSortedArray(std::vector<int>& array) {
 }
 
 int countNodes(TreeNode* root) {
-    if (root != nullptr) {
-        return 1 + countNodes(root->left) + countNodes(root->right);
-    }
-    return 0;
+    return root == nullptr ? 0 : 1 + countNodes(root->left) +
+                                     countNodes(root->right);
 }
 
 int getHeight(TreeNode* root) {
@@ -269,11 +265,11 @@ int getNodeLevel(TreeNode* root, TreeNode* target, int level = 1) {
     }
     return 0;
 }
-/// @brief 
-/// @param root 
-/// @param target 
-/// @param level 
-/// @return 
+/// @brief
+/// @param root
+/// @param target
+/// @param level
+/// @return
 int getNodeLevel(TreeNode* root, int target, int level = 1) {
     if (root != nullptr) {
         if (root->val == target) {
@@ -285,8 +281,8 @@ int getNodeLevel(TreeNode* root, int target, int level = 1) {
     }
     return 0;
 }
-/// @brief 
-/// @param root 
+/// @brief
+/// @param root
 void inOrderDisplayIter(TreeNode* root) {
     std::stack<TreeNode*> q;
     TreeNode* temp = root;
@@ -302,8 +298,8 @@ void inOrderDisplayIter(TreeNode* root) {
         temp = temp->right;
     }
 }
-/// @brief 
-/// @param root 
+/// @brief reOrderDisplayIter
+/// @param root
 void preOrderDisplayIter(TreeNode* root) {
     std::stack<TreeNode*> q;
     TreeNode* temp = root;
