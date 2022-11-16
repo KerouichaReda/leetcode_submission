@@ -9,9 +9,10 @@ int dayOfYear(std::string& date) {
     for (int i = 0; i < month - 1; ++i) {
         day += months[i];
     }
-    day += (month > 2 && (year - 1900) % 4 == 0 && year != 1900);
+    day += year != 1900 &&  (month > 2 && (year - 1900) % 4 == 0 );
     return day;
 }
+
 int main(int argc, char const* argv[]) {
     /* code */
     return 0;

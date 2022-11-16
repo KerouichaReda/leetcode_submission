@@ -38,7 +38,7 @@ struct ListNode {
 
 ListNode* createListFromArray(std::vector<int> array) {
     ListNode* rootNode = nullptr;
-    ListNode* ptrNode = nullptr;
+    ListNode* ptrNode  = nullptr;
     ListNode* lastNode = nullptr;
 
     int length = (int)array.size();

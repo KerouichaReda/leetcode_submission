@@ -4,7 +4,7 @@
 # Unignore all with extensions
 !*.*
 *~
-.vscode
+./vscode
 !Documentation/
 !submission/
 
@@ -42,7 +42,7 @@
 *.app
 
 
-
+./vscode
 
 
 
