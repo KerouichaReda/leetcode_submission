@@ -1,8 +1,7 @@
 #include <iostream>
 
 int primes[3] = {2, 3, 5};
-bool isUgly(int n) {
-    ;
+bool isUgly(int n) {    
     if (n == 1 || n == 0) return n == 1;
     for (int& e : primes) {
         if (n % e == 0) {
