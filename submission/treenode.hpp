@@ -35,6 +35,7 @@
 #include <queue>
 #include <stack>
 #include <algorithm>
+#include <functional>
 
 struct TreeNode {
     int val;
@@ -314,4 +315,5 @@ void preOrderDisplayIter(TreeNode* root) {
         if (temp->left != nullptr) q.push(temp->left);
     }
 }
+
 #endif  // TREENODE

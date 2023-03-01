@@ -2,37 +2,34 @@
 #include <unordered_set>
 #include <vector>
 #include "treenode.hpp"
-std::unordered_map<int, std::vector<TreeNode*>> m_;
-std::unordered_set<TreeNode*> h_;
+std::hash<int> hasher_;
+std::unordered_map<std::size_t, std::vector<TreeNode*>> m_;
+
+std::size_t hash_combine(std::size_t seed, std::size_t h) {
+    seed ^= h + 0x517cc1b727220a95 + (seed << 6) + (seed >> 2);
+    return seed * 3;
+}
+
+std::size_t helper(TreeNode* root) {
+    if (root == nullptr) return hasher_(-1024);
+    std::size_t l = helper(root->left);
+    std::size_t v = hasher_(root->val);
+    std::size_t r = helper(root->right);
+    std::size_t h = hash_combine(hash_combine(l, v), r);
+    m_[h].push_back(root);
+    return h;
+}
 std::vector<TreeNode*> findDuplicateSubtrees(TreeNode* root) {
     std::vector<TreeNode*> solution;
-    helper(root, solution);
-    return solution;
-}
-void helper(TreeNode* root, std::vector<TreeNode*>& solution) {
-    if (root == nullptr) return;
-    if (m_.count(root->val)) {
-        for (TreeNode* temp : m_[root->val]) {
-            if (same_tree(temp, root)) {
-                if (!h_.count(temp)) {
-                    solution.push_back(root);
-                }
-                h_.insert(temp);
-                h_.insert(root);
-            }
+    helper(root);
+    for (auto p : m_) {
+        if (p.second.size() > 1) {
+            solution.push_back(*p.second.begin());
         }
     }
-    m_[root->val].push_back(root);
-    helper(root->left, solution);
-    helper(root->right, solution);
+    return solution;
 }
-bool same_tree(TreeNode* root_1, TreeNode* root_2) {
-    if (root_1 == nullptr && root_2 == nullptr) return true;
-    if (root_1 == nullptr || root_2 == nullptr) return false;
-    return root_1->val == root_2->val &&
-           same_tree(root_1->left, root_2->left) &&
-           same_tree(root_1->right, root_2->right);
-}
+
 int main(int argc, char const* argv[]) {
     /* code */
     return 0;
