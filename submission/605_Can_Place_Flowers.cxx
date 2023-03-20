@@ -1,10 +1,12 @@
 #include <vector>
-
-bool canPlaceFlowers(std::vector<int>& flowerbed, int n) {
-    flowerbed.push_back(0);
-    flowerbed.insert(flowerbed.begin(), 0);
-    for (int i = 2, size = flowerbed.size(); i < size && n > 0; ++i) {
-        if ((flowerbed[i] + flowerbed[i - 1] + flowerbed[i - 2]) == 0) {
+#include <iterator>
+#include <iostream>
+bool canPlaceFlowers(const std::vector<int>& flowerbed, int n) {
+    std::vector<int> temp = {0};
+    std::copy(flowerbed.begin(), flowerbed.end(), std::back_inserter(temp));
+    temp.push_back(0);
+    for (int i = 2, size = temp.size(); i < size && n > 0; ++i) {
+        if ((temp[i] + temp[i - 1] + temp[i - 2]) == 0) {
             n--;
             i++;
         }
@@ -12,6 +14,7 @@ bool canPlaceFlowers(std::vector<int>& flowerbed, int n) {
     return n == 0;
 }
 int main(int argc, char const* argv[]) {
-    /* code */
+    std::vector<int> flowerbed = {0};
+    std::cout << canPlaceFlowers(flowerbed, 1) << std::endl;
     return 0;
 }
