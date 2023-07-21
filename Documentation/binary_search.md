@@ -1,0 +1,1 @@
+## List of intresting binary search:
