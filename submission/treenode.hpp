@@ -302,7 +302,6 @@ void inOrderDisplayIter(TreeNode* root) {
 /// @brief reOrderDisplayIter
 /// @param root
 
-
 void preOrderDisplayIter(TreeNode* root) {
     std::stack<TreeNode*> q;
     TreeNode* temp = root;

@@ -38,7 +38,7 @@ struct ListNode {
 
 ListNode* createListFromArray(std::vector<int> array) {
     ListNode* rootNode = nullptr;
-    ListNode* ptrNode  = nullptr;
+    ListNode* ptrNode = nullptr;
     ListNode* lastNode = nullptr;
 
     int length = (int)array.size();
@@ -67,45 +67,26 @@ void displayList(ListNode* root) {
     std::cout << std::endl;
 }
 // 21. Merge Two Sorted Lists
-ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) {
-    if (l1 == nullptr && l2 == nullptr) return nullptr;
-    if (l1 == nullptr) return l2;
-    if (l2 == nullptr) return l1;
-
-    ListNode* rootListNode = nullptr;
-    ListNode* ptrListNode;
-
-    while (l1 != nullptr or l2 != nullptr) {
-        if (rootListNode == nullptr) {
-            if (l1->val < l2->val) {
-                rootListNode = new ListNode(l1->val);
-                l1 = l1->next;
-            } else {
-                rootListNode = new ListNode(l2->val);
-                l2 = l2->next;
-            }
-            ptrListNode = rootListNode;
-        } else {
+ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) {    
+    ListNode* rootListNode = new ListNode(0);
+    ListNode* ptrListNode = rootListNode;
+    while (l1 != nullptr || l2 != nullptr) {
             if (l2 == nullptr) {
                 ptrListNode->next = new ListNode(l1->val);
-                l1 = l1->next;
-                ptrListNode = ptrListNode->next;
+                l1 = l1->next;                
             } else if (l1 == nullptr) {
                 ptrListNode->next = new ListNode(l2->val);
-                l2 = l2->next;
-                ptrListNode = ptrListNode->next;
+                l2 = l2->next;            
             } else if (l1->val < l2->val) {
                 ptrListNode->next = new ListNode(l1->val);
-                l1 = l1->next;
-                ptrListNode = ptrListNode->next;
-            } else if (l1->val >= l2->val) {
+                l1 = l1->next;                
+            } else {
                 ptrListNode->next = new ListNode(l2->val);
-                l2 = l2->next;
-                ptrListNode = ptrListNode->next;
+                l2 = l2->next;                
             }
-        }
+            ptrListNode = ptrListNode->next;        
     }
-    return rootListNode;
+    return rootListNode->next;
 }
 
 ListNode* detectCycle(ListNode* head) {
