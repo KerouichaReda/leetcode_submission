@@ -23,8 +23,11 @@
 
 
 #include <iostream>
+#include <vector>
+#include <string>
+#include <set>
 
-int uniqueMorseRepresentations(vector<string>& words) {
+int uniqueMorseRepresentations(std::vector<std::string>& words) {
 	std::vector<std::string> code ={".-","-...","-.-.","-..",".","..-.","--.","....","..",".---","-.-",".-..","--","-.","---",".--.","--.-",".-.","...","-","..-","...-",".--","-..-","-.--","--.."};
 	std::string m;
 	std::set<std::string> transformation;

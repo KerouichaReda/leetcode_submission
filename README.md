@@ -5,11 +5,11 @@ This repos, contain all my submission for leetcode problems, I tried my best to 
 Leetcode profile :  https://leetcode.com/RedaKerouicha/
 
 
-https://projecteuler.net/problem=215
+![Alt text](Documentation/image.png)
 
-big prime : 
+big prime number : 
 
-0x3B9ACA07
-1,000,000,007
-o7346545007
+0x3B9ACA07<br>
+1,000,000,007<br>
+o7346545007<br>
 0011 1011 1001 1010 1100 1010 0000 0111
