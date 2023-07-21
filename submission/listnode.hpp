@@ -55,7 +55,6 @@ ListNode* createListFromArray(std::vector<int> array) {
         lastNode = ptrNode;
         ptrNode = nullptr;
     }
-
     return rootNode;
 }
 
@@ -66,27 +65,27 @@ void displayList(ListNode* root) {
     }
     std::cout << std::endl;
 }
-// 21. Merge Two Sorted Lists
-ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) {    
-    ListNode* rootListNode = new ListNode(0);
-    ListNode* ptrListNode = rootListNode;
+
+ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) {
+    ListNode* head = new ListNode(0);
+    ListNode* current = head;
     while (l1 != nullptr || l2 != nullptr) {
-            if (l2 == nullptr) {
-                ptrListNode->next = new ListNode(l1->val);
-                l1 = l1->next;                
-            } else if (l1 == nullptr) {
-                ptrListNode->next = new ListNode(l2->val);
-                l2 = l2->next;            
-            } else if (l1->val < l2->val) {
-                ptrListNode->next = new ListNode(l1->val);
-                l1 = l1->next;                
-            } else {
-                ptrListNode->next = new ListNode(l2->val);
-                l2 = l2->next;                
-            }
-            ptrListNode = ptrListNode->next;        
+        if (l2 == nullptr) {
+            current->next = new ListNode(l1->val);
+            l1 = l1->next;
+        } else if (l1 == nullptr) {
+            current->next = new ListNode(l2->val);
+            l2 = l2->next;
+        } else if (l1->val < l2->val) {
+            current->next = new ListNode(l1->val);
+            l1 = l1->next;
+        } else {
+            current->next = new ListNode(l2->val);
+            l2 = l2->next;
+        }
+        current = current->next;
     }
-    return rootListNode->next;
+    return head->next;
 }
 
 ListNode* detectCycle(ListNode* head) {
@@ -106,4 +105,4 @@ ListNode* detectCycle(ListNode* head) {
     return nullptr;
 }
 
-#endif  // LISTNODE
+#endif  // LISTNODE_HPP
