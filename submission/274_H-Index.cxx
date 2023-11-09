@@ -13,9 +13,9 @@ int hIndex(std::vector<int>& citations) {
 }
 
 int main(int argc, char const* argv[]) {
-    std::vector<int> citations({
+    std::vector<int> citations = {
         1, 1, 1, 1, 1, 1,
-    });
+    };
     std::cout << hIndex(citations);
     return 0;
 }
