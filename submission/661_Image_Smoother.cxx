@@ -2,8 +2,8 @@
 #include <iostream>
 std::vector<std::vector<int>> imageSmoother(
     std::vector<std::vector<int>>& img) {
-    std::vector<std::vector<int>> solution(
-        img.size(), std::std::vector<int>(img[0].size(), 0));
+    std::vector<std::vector<int>> solution(img.size(),
+                                           std::vector<int>(img[0].size(), 0));
     for (int i = 0, row = img.size(), col = img[0].size(); i < row; ++i) {
         for (int j = 0; j < col; ++j) {
             int sum = 0;
