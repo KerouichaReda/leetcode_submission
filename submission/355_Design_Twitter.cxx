@@ -9,7 +9,6 @@ class Twitter {
     void postTweet(int userId, int tweetId) {
         feed.push_back(std::make_pair(userId, tweetId));
     }
-
     std::vector<int> getNewsFeed(int userId) {
         std::vector<int> news_feed;
         for (int i = feed.size() - 1; i >= 0 && news_feed.size() < 10; --i) {
