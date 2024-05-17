@@ -27,7 +27,7 @@ TreeNode* removeLeafNodes(TreeNode* root, int target) {
     if (root == nullptr) return root;
     root->left = removeLeafNodes(root->left, target);
     root->right = removeLeafNodes(root->right, target);
-    return (root->left == root->right && root->val == target) ? nullptr : root;
+    return root->left == root->right && root->val == target ? nullptr : root;
 }
 int main(int argc, char** argv) {
     TreeNode* root = new TreeNode(1);
