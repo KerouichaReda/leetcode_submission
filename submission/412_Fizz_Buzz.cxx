@@ -1,15 +1,19 @@
-#include <vector>
-#include <string>
 #include <iostream>
+#include <string>
+#include <vector>
 
 std::vector<std::string> fizzBuzz(int n) {
+    const std::vector<std::pair<int, std::string>> m = {{3, "Fizz"},
+                                                        {5, "Buzz"}};
     std::vector<std::string> solution;
     for (int i = 1; i <= n; ++i) {
-        std::string temp{};
-        if (i % 3 == 0) temp += "Fizz";
-        if (i % 5 == 0) temp += "Buzz";
-        if (temp.empty()) temp = std::to_string(i);
-        solution.push_back(temp);
+        std::string temp;
+        for (const std::pair<int, std::string>& p : m) {
+            if (i % p.first == 0) {
+                temp += p.second;
+            }
+        }
+        solution.push_back(temp.empty() ? std::to_string(i) : temp);
     }
     return solution;
 }
@@ -17,6 +21,6 @@ std::vector<std::string> fizzBuzz(int n) {
 int main(int argc, char const* argv[]) {
     int n = 30;
     std::vector<std::string> solution = fizzBuzz(n);
-    
+
     return 0;
 }

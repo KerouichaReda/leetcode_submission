@@ -1,5 +1,5 @@
-#include <string>
 #include <iostream>
+#include <string>
 
 int countHomogenous(std::string s) {
     const std::int64_t mod{0x3B9ACA07};

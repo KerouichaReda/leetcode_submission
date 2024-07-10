@@ -1,6 +1,6 @@
-#include <string>
-#include <set>
 #include <iostream>
+#include <set>
+#include <string>
 int numberOfSpecialChars(std::string word) {
     std::set<char> s(word.begin(), word.end());
     int solution{};

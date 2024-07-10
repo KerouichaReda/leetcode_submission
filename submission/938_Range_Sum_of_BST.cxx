@@ -22,16 +22,16 @@
  */
 
 #include <iostream>
-#incude "treenode.hpp"
+
+#include "treenode.hpp"
 
 int rangeSumBST(TreeNode* root, int low, int high) {
-    return root == nullptr ? 0 : root->val >= low && root->val <= high
-                                     ? root->val +
-                                           rangeSumBST(root->left, low, high) +
-                                           rangeSumBST(root->right, low, high)
-                                     : root->val < low
-                                           ? rangeSumBST(root->right, low, high)
-                                           : rangeSumBST(root->left, low, high);
+    return root == nullptr ? 0
+           : root->val >= low && root->val <= high
+               ? root->val + rangeSumBST(root->left, low, high) +
+                     rangeSumBST(root->right, low, high)
+           : root->val < low ? rangeSumBST(root->right, low, high)
+                             : rangeSumBST(root->left, low, high);
 }
 
 int main(int argc, char** argv) { return 0; }

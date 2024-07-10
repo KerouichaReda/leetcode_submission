@@ -1,6 +1,6 @@
 #include <iostream>
-#include <vector>
 #include <string>
+#include <vector>
 
 int minDeletionSize(std::vector<std::string>& strs) {
     int solution{0};
@@ -9,8 +9,7 @@ int minDeletionSize(std::vector<std::string>& strs) {
     for (std::size_t i = 0; i < col; ++i) {
         char pre{'a'};
         std::size_t j = 0;
-        for (; j < row && strs[j][i] >= pre; pre = strs[j][i], ++j)
-            ;
+        for (; j < row && strs[j][i] >= pre; pre = strs[j][i], ++j);
         solution += j != row;
     }
     return solution;
