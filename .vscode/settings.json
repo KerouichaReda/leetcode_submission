@@ -93,6 +93,22 @@
         "xtree": "cpp",
         "xutility": "cpp",
         "ranges": "cpp",
-        "span": "cpp"
+        "span": "cpp",
+        "barrier": "cpp",
+        "coroutine": "cpp",
+        "expected": "cpp",
+        "source_location": "cpp",
+        "format": "cpp",
+        "generator": "cpp",
+        "latch": "cpp",
+        "numbers": "cpp",
+        "print": "cpp",
+        "semaphore": "cpp",
+        "spanstream": "cpp",
+        "stacktrace": "cpp",
+        "stdfloat": "cpp",
+        "stop_token": "cpp",
+        "syncstream": "cpp",
+        "text_encoding": "cpp"
     }
 }
