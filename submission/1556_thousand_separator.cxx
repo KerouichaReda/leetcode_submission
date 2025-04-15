@@ -20,14 +20,26 @@
  *
  *
  */
- 
- #include <iostream>
- #include <set>
- #include <string>
- #include <vector>
- #include <map>
- #include <numeric>
- #include <algorithm>
- 
- int main(int argc, char** argv) { return 0; }
-    
+
+#include <iostream>
+#include <set>
+#include <string>
+#include <vector>
+#include <map>
+#include <numeric>
+#include <algorithm>
+std::string thousandSeparator(int n) {
+    std::string solution{};
+    std::string temp = std::to_string(n);
+    std::reverse(temp.begin(), temp.end());
+    int index{};
+    for (char c : temp) {
+        solution.push_back(c);
+        if (++index % 3 == 0) solution.push_back('.');
+    }
+    if (solution.back() == '.') solution.pop_back();
+    std::reverse(solution.begin(), solution.end());
+    return solution;
+}
+
+int main(int argc, char** argv) { return 0; }
