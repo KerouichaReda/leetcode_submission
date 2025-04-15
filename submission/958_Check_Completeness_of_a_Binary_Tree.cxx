@@ -5,9 +5,9 @@ std::vector<std::vector<TreeNode*>> tree;
 bool isCompleteTree(TreeNode* root) {
     helper(root);
     tree.pop_back();
-    int height = tree.size() - 1 ;
+    int height = tree.size() - 1;
     int node_nb = 1;
-    for (int i = 0; i < height ; i++, node_nb <<= 1) {
+    for (int i = 0; i < height; i++, node_nb <<= 1) {
         if (tree[i].size() != node_nb) return false;
         for (TreeNode* node : tree[i]) {
             if (node == nullptr) return false;
