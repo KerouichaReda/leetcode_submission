@@ -109,6 +109,11 @@
         "stdfloat": "cpp",
         "stop_token": "cpp",
         "syncstream": "cpp",
-        "text_encoding": "cpp"
+        "text_encoding": "cpp",
+        "locale": "cpp",
+        "xlocbuf": "cpp",
+        "xlocmes": "cpp",
+        "xlocmon": "cpp",
+        "xloctime": "cpp"
     }
 }
