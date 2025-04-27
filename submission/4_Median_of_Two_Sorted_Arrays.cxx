@@ -21,6 +21,9 @@
  * https://leetcode.com/problems/median-of-two-sorted-arrays/
  */
 
+
+ #include <vector>
+ #include <algorithm>
 double findMedianSortedArrays(std::vector<int>& nums1, vector<int>& nums2) {
     int len1 = nums1.size();
     int len2 = nums2.size();
