@@ -14,8 +14,7 @@ std::vector<std::string> topKFrequent(std::vector<std::string>& words, int k) {
     for (std::pair<std::string, int> h : m) {
         hist.push_back(h);
     }
-    std::sort(hist.begin(), hist.end(), [](std::pair<std::string, int> a,
-                                           std::pair<std::string, int> b) {
+    std::sort(hist.begin(), hist.end(), [](std::pair<std::string, int> a, std::pair<std::string, int> b) {
         return a.second == b.second ? a.first < b.first : a.second > b.second;
     });
 

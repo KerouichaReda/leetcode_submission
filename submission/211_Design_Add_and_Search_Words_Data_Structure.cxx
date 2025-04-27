@@ -45,9 +45,7 @@ class WordDictionary {
     struct TrieNode {
         std::vector<TrieNode*> child;
         bool end_of_string;
-        TrieNode() : end_of_string(false) {
-            child = std::vector<TrieNode*>(26, nullptr);
-        }
+        TrieNode() : end_of_string(false) { child = std::vector<TrieNode*>(26, nullptr); }
     } * root;
     bool search_util(TrieNode* root, int index, std::string& word) {
         if (root == nullptr) {
@@ -59,8 +57,7 @@ class WordDictionary {
         bool solution = false;
         if (word[index] == '.') {
             for (int i = 0; i < 26; i++) {
-                solution =
-                    solution || search_util(root->child[i], index + 1, word);
+                solution = solution || search_util(root->child[i], index + 1, word);
             }
         } else {
             int p = word[index] - 'a';

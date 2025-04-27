@@ -6,9 +6,7 @@ int numberOfBeams(std::vector<std::string>& bank) {
     int solution{0};
     int pre{0};
     for (std::string& s : bank) {
-        int curr = std::accumulate(s.begin(), s.end(), 0, [](int sum, char c) {
-            return sum + (c == '1');
-        });
+        int curr = std::accumulate(s.begin(), s.end(), 0, [](int sum, char c) { return sum + (c == '1'); });
         solution += curr * pre;
         pre = curr ? curr : pre;
     }

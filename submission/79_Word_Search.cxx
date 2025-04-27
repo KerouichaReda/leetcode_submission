@@ -30,14 +30,12 @@ int row{};
 int col{};
 bool dfs(grid& board, int i, int j, std::string& word) {
     if (word.empty()) return true;
-    if (i >= row || i < 0 || j >= col || j < 0 || board[i][j] == 0 ||
-        word.back() != board[i][j])
-        return false;
+    if (i >= row || i < 0 || j >= col || j < 0 || board[i][j] == 0 || word.back() != board[i][j]) return false;
     board[i][j] = 0;
     char temp = word.back();
     word.pop_back();
-    bool result = dfs(board, i + 1, j, word) || dfs(board, i - 1, j, word) ||
-                  dfs(board, i, j + 1, word) || dfs(board, i, j - 1, word);
+    bool result = dfs(board, i + 1, j, word) || dfs(board, i - 1, j, word) || dfs(board, i, j + 1, word) ||
+                  dfs(board, i, j - 1, word);
     word.push_back(temp);
     board[i][j] = temp;
     return result;

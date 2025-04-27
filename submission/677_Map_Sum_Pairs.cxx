@@ -4,7 +4,7 @@
 class MapSum {
    public:
     MapSum() {}
-    struct TrieNode {        
+    struct TrieNode {
         int value = 0;
         TrieNode* child[26] = {nullptr};
     };
@@ -16,7 +16,7 @@ class MapSum {
                 curr->child[c - 'a'] = new TrieNode();
             }
             curr = curr->child[c - 'a'];
-        }        
+        }
         curr->value = val;
     }
 

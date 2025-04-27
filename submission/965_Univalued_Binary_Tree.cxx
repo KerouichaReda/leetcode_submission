@@ -25,9 +25,7 @@
 #include "treenode.hpp"
 bool isUnivalTree(TreeNode* root) { return isSameValue(root, root->val); }
 bool isSameValue(TreeNode* root, const int& value) {
-    return root != nullptr
-               ? root->val == value && isSameValue(root->left, value) &&
-                     isSameValue(root->right, value)
-               : true;
+    return root != nullptr ? root->val == value && isSameValue(root->left, value) && isSameValue(root->right, value)
+                           : true;
 }
 int main(int argc, char** argv) { return 0; }

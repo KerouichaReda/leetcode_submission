@@ -26,11 +26,9 @@
 #include <algorithm>
 #include <numeric>
 
-int findTheDistanceValue(std::vector<int>& arr1, std::vector<int>& arr2,
-                         const int& d) {
+int findTheDistanceValue(std::vector<int>& arr1, std::vector<int>& arr2, const int& d) {
     return std::accumulate(arr1.begin(), arr1.end(), 0, [&](int sum, int& e) {
-        return sum + std::all_of(arr2.begin(), arr2.end(),
-                                 [&](int& i) { return std::abs(i - e) > d; });
+        return sum + std::all_of(arr2.begin(), arr2.end(), [&](int& i) { return std::abs(i - e) > d; });
     });
 }
 

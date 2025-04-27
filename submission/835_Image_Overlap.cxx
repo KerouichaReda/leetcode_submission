@@ -25,12 +25,11 @@
 #include <vector>
 #include <functional>
 
-int largestOverlap(std::vector<std::vector<int>>& A,
-                   std::vector<std::vector<int>>& B) {
+int largestOverlap(std::vector<std::vector<int>>& A, std::vector<std::vector<int>>& B) {
     int size = A.size();
     int solution = 0;
     int sum = 0;
-    int p1, p2, p3, p4; ///< corresponding index 
+    int p1, p2, p3, p4;  ///< corresponding index
     for (int i = -size + 1; i < size; i++) {
         for (int j = -size + 1; j < size; j++) {
             sum = 0;
@@ -43,7 +42,7 @@ int largestOverlap(std::vector<std::vector<int>>& A,
                     sum += A[p1][p2] * B[p3][p4];
                 }
             }
-            solution = std::max(solution,sum);
+            solution = std::max(solution, sum);
         }
     }
     return solution;

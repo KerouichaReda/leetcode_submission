@@ -15,6 +15,6 @@ int balancedStringSplit(std::string s) {
 
 int main(int argc, char const* argv[]) {
     std::string s{"LLRR"};
-    std::cout << balancedStringSplit( s) << std::endl; 
+    std::cout << balancedStringSplit(s) << std::endl;
     return 0;
 }

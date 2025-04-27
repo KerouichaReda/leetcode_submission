@@ -6,8 +6,7 @@ int findContentChildren(std::vector<int>& greed, std::vector<int>& cookies) {
     int solution{0};
     std::sort(greed.begin(), greed.end());
     std::sort(cookies.begin(), cookies.end());
-    for (std::size_t i = 0, j = 0, greed_size = greed.size(),
-                     cookies_size = cookies.size();
+    for (std::size_t i = 0, j = 0, greed_size = greed.size(), cookies_size = cookies.size();
          i < greed_size && j < cookies_size; ++i) {
         while (j < cookies_size && cookies[j++] < greed[i]) {
         }

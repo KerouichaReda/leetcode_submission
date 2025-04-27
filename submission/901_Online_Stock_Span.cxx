@@ -6,8 +6,7 @@ class StockSpanner {
     int next(int price) {
         prices_.push_back(price);
         int temp{0};
-        for (auto itr = prices_.rbegin(), end = prices_.rend();
-             itr != end && *itr <= price; ++itr, temp++)
+        for (auto itr = prices_.rbegin(), end = prices_.rend(); itr != end && *itr <= price; ++itr, temp++)
             ;
         return temp;
     }

@@ -25,12 +25,10 @@
 #include "treenode.hpp"
 
 int sumNumbers(TreeNode* root, int pre = 0) {
-    return root == nullptr
-               ? 0
-               : root->left == nullptr && root->right == nullptr
-                     ? pre * 10 + root->val
-                     : sumNumbers(root->left, pre * 10 + root->val) +
-                           sumNumbers(root->right, pre * 10 + root->val);
+    return root == nullptr ? 0 : root->left == nullptr && root->right == nullptr
+                                     ? pre * 10 + root->val
+                                     : sumNumbers(root->left, pre * 10 + root->val) +
+                                           sumNumbers(root->right, pre * 10 + root->val);
 }
 
 int main(int argc, char** argv) { return 0; }

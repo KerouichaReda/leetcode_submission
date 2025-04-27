@@ -25,10 +25,8 @@
 #include <iostream>
 
 TreeNode* searchBST(TreeNode* root, int val) {
-    return root == nullptr || root->val == val
-               ? root
-               : root->val < val ? searchBST(root->right, val)
-                                 : searchBST(root->left, val);
+    return root == nullptr || root->val == val ? root : root->val < val ? searchBST(root->right, val)
+                                                                        : searchBST(root->left, val);
 }
 
 int main(int argc, char** argv) { return 0; }

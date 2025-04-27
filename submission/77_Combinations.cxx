@@ -9,8 +9,7 @@ std::vector<std::vector<int>> combine(int n, int k) {
     }
     return solution;
 }
-void helper(int e, int n, int k, std::vector<int>& temp,
-            std::vector<std::vector<int>>& solution) {
+void helper(int e, int n, int k, std::vector<int>& temp, std::vector<std::vector<int>>& solution) {
     temp.push_back(e);
     if (temp.size() >= k) {
         solution.push_back(temp);

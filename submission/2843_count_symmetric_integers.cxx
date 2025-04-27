@@ -33,11 +33,8 @@ int countSymmetricIntegers(int low, int high) {
     int result{0};
     for (int i = low; i <= high; i++) {
         std::string temp = std::to_string(i);
-        result += temp.size() == 2
-                      ? temp[0] == temp[1]
-                      : temp.size() == 4
-                            ? (temp[0] + temp[1]) == (temp[2] + temp[3])
-                            : 0;
+        result +=
+            temp.size() == 2 ? temp[0] == temp[1] : temp.size() == 4 ? (temp[0] + temp[1]) == (temp[2] + temp[3]) : 0;
     }
     return result;
 }

@@ -3,8 +3,7 @@
 #include <vector>
 
 std::vector<std::string> fizzBuzz(int n) {
-    const std::vector<std::pair<int, std::string>> m = {{3, "Fizz"},
-                                                        {5, "Buzz"}};
+    const std::vector<std::pair<int, std::string>> m = {{3, "Fizz"}, {5, "Buzz"}};
     std::vector<std::string> solution;
     for (int i = 1; i <= n; ++i) {
         std::string temp;

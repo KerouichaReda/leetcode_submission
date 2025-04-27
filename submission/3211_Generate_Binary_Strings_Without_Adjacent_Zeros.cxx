@@ -26,8 +26,7 @@
 #include <string>
 #include <vector>
 
-void backtrack(std::string temp, int n, std::vector<std::string>& solution,
-               std::optional<bool> flag = std::nullopt) {
+void backtrack(std::string temp, int n, std::vector<std::string>& solution, std::optional<bool> flag = std::nullopt) {
     if (n == 0) {
         solution.push_back(temp);
         return;

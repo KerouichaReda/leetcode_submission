@@ -2,8 +2,7 @@
 #include <map>
 #include <iostream>
 
-std::vector<std::vector<int>> findWinners(
-    std::vector<std::vector<int>>& matches) {
+std::vector<std::vector<int>> findWinners(std::vector<std::vector<int>>& matches) {
     std::map<int, int> players;
     for (std::vector<int>& matche : matches) {
         int win = matche[0];

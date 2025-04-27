@@ -25,9 +25,8 @@
 #include <string>
 
 int strStr(std::string haystack, std::string needle) {
-    for (int i = 0, search_size = haystack.size() - needle.size() + 1,
-             needle_size = needle.size();
-         i < search_size; ++i) {
+    for (int i = 0, search_size = haystack.size() - needle.size() + 1, needle_size = needle.size(); i < search_size;
+         ++i) {
         int j = 0;
         for (; j < needle_size && haystack[i + j] == needle[j]; ++j)
             ;

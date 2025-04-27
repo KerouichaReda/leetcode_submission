@@ -8,9 +8,11 @@ bool isLongPressedName(std::string name, std::string typed) {
         char c = name[i];
         int count = 0;
         int t = 0;
-        for (; c == name[i]; count++, i++);
+        for (; c == name[i]; count++, i++)
+            ;
         i--;
-        for (; j < typed.size() && c == typed[j]; j++, t++);
+        for (; j < typed.size() && c == typed[j]; j++, t++)
+            ;
         if (t < count) return false;
     }
     return i == name.size() && j == typed.size();

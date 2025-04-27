@@ -12,8 +12,7 @@ std::string removeStars(const std::string& s) {
     return solution;
 }
 
-int main(int argc, char const *argv[])
-{
+int main(int argc, char const* argv[]) {
     /* code */
     return 0;
 }

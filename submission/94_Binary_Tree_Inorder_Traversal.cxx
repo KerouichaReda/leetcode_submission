@@ -1,68 +1,58 @@
 /*
  * 94_Binary_Tree_Inorder_Traversal.cxx
- * 
+ *
  * Copyright 2020 RedaKerouicha <redakerouicha@localhost>
- * 
+ *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301, USA.
- * 
- * 
+ *
+ *
  */
-
 
 #include <iostream>
 #include <vector>
 #include <stack>
-struct TreeNode 
-{
-	int val;
-	TreeNode *left;
-	TreeNode *right;
-	explicit TreeNode() : val(0), left(nullptr), right(nullptr) {}
-	explicit TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
-	explicit TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
-	~TreeNode(){
-		delete left;
-		delete right;
-	}
+struct TreeNode {
+    int val;
+    TreeNode* left;
+    TreeNode* right;
+    explicit TreeNode() : val(0), left(nullptr), right(nullptr) {}
+    explicit TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+    explicit TreeNode(int x, TreeNode* left, TreeNode* right) : val(x), left(left), right(right) {}
+    ~TreeNode() {
+        delete left;
+        delete right;
+    }
 };
 
-vector<int> inorderTraversal(TreeNode* root) 
-    {
-        std::vector<int> result;
-        std::stack<TreeNode*> tnStack;
-        TreeNode* current = root;
-       
-        while(current!=nullptr || tnStack.empty()==false)
-        {
-            while(current!=nullptr)
-            {
-                tnStack.push(current);
-                    current=current->left;
-            }
-            current=tnStack.top();
-            tnStack.pop();
-            result.push_back(current->val);
-            current=current->right;
-        }
-        return result;
-    }
+vector<int> inorderTraversal(TreeNode* root) {
+    std::vector<int> result;
+    std::stack<TreeNode*> tnStack;
+    TreeNode* current = root;
 
-int main(int argc, char **argv)
-{
-	
-	return 0;
+    while (current != nullptr || tnStack.empty() == false) {
+        while (current != nullptr) {
+            tnStack.push(current);
+            current = current->left;
+        }
+        current = tnStack.top();
+        tnStack.pop();
+        result.push_back(current->val);
+        current = current->right;
+    }
+    return result;
 }
 
+int main(int argc, char** argv) { return 0; }

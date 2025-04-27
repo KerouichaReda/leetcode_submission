@@ -2,8 +2,7 @@
 #include <iostream>
 #include <algorithm>
 
-int distanceBetweenBusStops(std::vector<int>& distance, int start,
-                            int destination) {
+int distanceBetweenBusStops(std::vector<int>& distance, int start, int destination) {
     int size = distance.size();
     int move[2] = {};
     int solution[2] = {};
@@ -20,12 +19,11 @@ int distanceBetweenBusStops(std::vector<int>& distance, int start,
     return std::min(solution[0], solution[1]);
 }
 
-int main(int argc, char const *argv[])
-{
-    std::vector<int> distance{1,2,3,4};
+int main(int argc, char const* argv[]) {
+    std::vector<int> distance{1, 2, 3, 4};
     int start = 0;
-    int destination =1;
-    std::cout << distanceBetweenBusStops(distance,start, destination) << std::endl;
+    int destination = 1;
+    std::cout << distanceBetweenBusStops(distance, start, destination) << std::endl;
 
     return 0;
 }

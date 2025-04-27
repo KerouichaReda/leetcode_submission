@@ -25,14 +25,13 @@
 
 bool isSubPath(ListNode* head, TreeNode* root) {
     if (root == nullptr && head != nullptr) return false;
-    return isSubPathHelper(head, root) || isSubPath(head, root->left) ||
-           isSubPath(head, root->right);
+    return isSubPathHelper(head, root) || isSubPath(head, root->left) || isSubPath(head, root->right);
 }
 bool isSubPathHelper(ListNode* head, TreeNode* root) {
     if (head == nullptr) return true;
     if (root == nullptr && head != nullptr) return false;
-    return root->val == head->val && (isSubPathHelper(head->next, root->left) ||
-                                      isSubPathHelper(head->next, root->right));
+    return root->val == head->val &&
+           (isSubPathHelper(head->next, root->left) || isSubPathHelper(head->next, root->right));
 }
 
 int main(int argc, char** argv) { return 0; }

@@ -7,14 +7,10 @@ std::string smallestFromLeaf(TreeNode* root, std::string temp = "") {
     if (root->left == nullptr && root->right == nullptr) return temp;
     std::string l = smallestFromLeaf(root->left, temp);
     std::string r = smallestFromLeaf(root->right, temp);
-    return root->left != nullptr && root->right != nullptr
-               ? std::min(l, r)
-               : root->right != nullptr ? r : l;
+    return root->left != nullptr && root->right != nullptr ? std::min(l, r) : root->right != nullptr ? r : l;
 }
 
-
-int main(int argc, char const *argv[])
-{
+int main(int argc, char const* argv[]) {
     /* code */
     return 0;
 }

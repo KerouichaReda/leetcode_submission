@@ -7,13 +7,10 @@ struct TreeNode {
     TreeNode* right;
     TreeNode() : val(0), left(nullptr), right(nullptr) {}
     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
-    TreeNode(int x, TreeNode* left, TreeNode* right)
-        : val(x), left(left), right(right) {}
+    TreeNode(int x, TreeNode* left, TreeNode* right) : val(x), left(left), right(right) {}
 };
 
-void averageOfLevels_helper(TreeNode* root,
-                            std::vector<std::pair<int, int>>& records,
-                            int level = 0) {
+void averageOfLevels_helper(TreeNode* root, std::vector<std::pair<int, int>>& records, int level = 0) {
     if (root == nullptr) return;
     if (records.size() <= level) records.push_back(std::make_pair(0, 0));
     records[level].first += root->val;

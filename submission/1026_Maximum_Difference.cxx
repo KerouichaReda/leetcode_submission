@@ -30,11 +30,8 @@
 int maxAncestorDiff(TreeNode* root, int min_ = 100001, int max_ = -1) {
     return root == nullptr
                ? max_ - min_
-               : std::max(
-                     maxAncestorDiff(root->left, std::min(min_, root->val),
-                                     std::max(max_, root->val)),
-                     maxAncestorDiff(root->right, std::min(min_, root->val),
-                                     std::max(max_, root->val)));
+               : std::max(maxAncestorDiff(root->left, std::min(min_, root->val), std::max(max_, root->val)),
+                          maxAncestorDiff(root->right, std::min(min_, root->val), std::max(max_, root->val)));
 }
 
 int main(int argc, char** argv) {

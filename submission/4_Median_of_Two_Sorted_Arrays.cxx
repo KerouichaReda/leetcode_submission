@@ -25,14 +25,10 @@ double findMedianSortedArrays(std::vector<int>& nums1, vector<int>& nums2) {
     int len1 = nums1.size();
     int len2 = nums2.size();
     if (len1 == 0) {
-        return (len2 % 2 == 0)
-                   ? (double)(nums2[len2 / 2 - 1] + nums2[len2 / 2]) / 2
-                   : nums2[(len2 - 1) / 2];
+        return (len2 % 2 == 0) ? (double)(nums2[len2 / 2 - 1] + nums2[len2 / 2]) / 2 : nums2[(len2 - 1) / 2];
     }
     if (len2 == 0) {
-        return (len1 % 2 == 0)
-                   ? (double)(nums1[len1 / 2 - 1] + nums1[len1 / 2]) / 2
-                   : nums1[(len1 - 1) / 2];
+        return (len1 % 2 == 0) ? (double)(nums1[len1 / 2 - 1] + nums1[len1 / 2]) / 2 : nums1[(len1 - 1) / 2];
     }
     int len = len1 + len2;
     int index1 = 0;
@@ -60,8 +56,7 @@ double findMedianSortedArrays(std::vector<int>& nums1, vector<int>& nums2) {
         }
     }
     std::cout << (len % 2 == 0);
-    med = (len % 2 == 0) ? ((double)(result[len / 2 - 1] + result[len / 2])) / 2
-                         : result[(len - 1) / 2];
+    med = (len % 2 == 0) ? ((double)(result[len / 2 - 1] + result[len / 2])) / 2 : result[(len - 1) / 2];
     return med;
 }
 }

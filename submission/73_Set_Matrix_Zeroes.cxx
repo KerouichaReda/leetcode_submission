@@ -27,7 +27,7 @@ void setZeroes(std::vector<std::vector<int>>& matrix) {
 
 int main(int argc, char const* argv[]) {
     /* code */
-    std::vector<std::vector<int>>  matrix = {{0,1},{1,1}};
+    std::vector<std::vector<int>> matrix = {{0, 1}, {1, 1}};
     setZeroes(matrix);
     return 0;
 }

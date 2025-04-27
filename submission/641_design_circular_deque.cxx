@@ -31,10 +31,7 @@
 
 class MyCircularDeque {
    public:
-    MyCircularDeque(int capacity)
-        : capacity_(capacity),
-          deque_(new int[capacity]),
-          front_(capacity - 1) {}
+    MyCircularDeque(int capacity) : capacity_(capacity), deque_(new int[capacity]), front_(capacity - 1) {}
 
     bool insertFront(int value) {
         if (isFull()) return false;
@@ -66,13 +63,9 @@ class MyCircularDeque {
         return true;
     }
 
-    int getFront() {
-        return isEmpty() ? -1 : deque_[(front_ + 1 + capacity_) % capacity_];
-    }
+    int getFront() { return isEmpty() ? -1 : deque_[(front_ + 1 + capacity_) % capacity_]; }
 
-    int getRear() {
-        return isEmpty() ? -1 : deque_[(back_ - 1 + capacity_) % capacity_];
-    }
+    int getRear() { return isEmpty() ? -1 : deque_[(back_ - 1 + capacity_) % capacity_]; }
 
     bool isEmpty() { return size_ == 0; }
 

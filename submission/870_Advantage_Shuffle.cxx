@@ -31,8 +31,7 @@ std::vector<int> advantageCount(std::vector<int>& A, std::vector<int>& B) {
     std::vector<int> solution(size);
     std::multiset<int> s(A.begin(), A.end());
     for (int i = 0; i < size; i++) {
-        std::multiset<int>::iterator itr =
-            B[i] >= *s.rbegin() ? s.begin() : s.upper_bound(B[i]);
+        std::multiset<int>::iterator itr = B[i] >= *s.rbegin() ? s.begin() : s.upper_bound(B[i]);
         solution[i] = *itr;
         s.erase(itr);
     }

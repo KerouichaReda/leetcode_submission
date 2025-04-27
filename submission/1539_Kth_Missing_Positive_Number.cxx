@@ -14,8 +14,8 @@ int findKthPositive(std::vector<int>& arr, int k) {
 }
 
 int main(int argc, char const* argv[]) {
-    std::vector<int> arr{1,2,3,4,5};
+    std::vector<int> arr{1, 2, 3, 4, 5};
     int k = 5;
-    std::cout << findKthPositive(arr, k) << std::endl; 
+    std::cout << findKthPositive(arr, k) << std::endl;
     return 0;
 }

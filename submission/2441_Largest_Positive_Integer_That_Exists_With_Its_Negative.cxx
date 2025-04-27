@@ -13,7 +13,7 @@ int findMaxK(std::vector<int>& nums) {
 }
 
 int main(int argc, char const* argv[]) {
-    std::vector<int> nums = {-1,0,1};
+    std::vector<int> nums = {-1, 0, 1};
     std::cout << findMaxK(nums) << std::endl;
     return 0;
 }

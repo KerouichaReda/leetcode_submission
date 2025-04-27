@@ -11,7 +11,7 @@ bool equalFrequency(std::string word) {
     if (f.size() == 2) {
         int min = f.begin()->first;
         int max = std::next(f.begin())->first;
-        if(min > max) std::swap(min,max);
+        if (min > max) std::swap(min, max);
         return (min + 1 == max && f[max] == 1) || (min == 1 && f[min] == 1);
     }
     return false;

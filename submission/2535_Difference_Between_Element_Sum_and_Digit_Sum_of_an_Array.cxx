@@ -4,9 +4,8 @@
 #include <numeric>
 
 int differenceOfSum(std::vector<int>& nums) {
-    std::pair<int, int> pair_sum = std::accumulate(
-        nums.begin(), nums.end(), std::make_pair(0, 0),
-        [](std::pair<int, int> sum, int& e) {
+    std::pair<int, int> pair_sum =
+        std::accumulate(nums.begin(), nums.end(), std::make_pair(0, 0), [](std::pair<int, int> sum, int& e) {
             int digit_sum{0};
             for (int temp = e; temp > 0; digit_sum += (temp % 10), temp /= 10)
                 ;

@@ -26,23 +26,23 @@
 #include <vector>
 #include <iostream>
 #include "treenode.hpp"
-TreeNode* post_order(TreeNode* root, std::set<int>& s, std::vector<TreeNode*>& solution ){
-if(root == nullptr) return nullptr;
-root->left = post_order(root->left,s,solution);
-root->right = post_order(root->right,s,solution);
+TreeNode* post_order(TreeNode* root, std::set<int>& s, std::vector<TreeNode*>& solution) {
+    if (root == nullptr) return nullptr;
+    root->left = post_order(root->left, s, solution);
+    root->right = post_order(root->right, s, solution);
 
-if(s.count(root->val)){
-    if(root->left != nullptr) solution.push_back(root->left);
-    if(root->right!= nullptr) solution.push_back(root->right);
-    return nullptr;
-}
-return root;
+    if (s.count(root->val)) {
+        if (root->left != nullptr) solution.push_back(root->left);
+        if (root->right != nullptr) solution.push_back(root->right);
+        return nullptr;
+    }
+    return root;
 }
 
 std::vector<TreeNode*> delNodes(TreeNode* root, std::vector<int>& to_delete) {
-    std::set<int> s(to_delete.begin(),to_delete.end());
+    std::set<int> s(to_delete.begin(), to_delete.end());
     std::vector<TreeNode*> solution;
-    root = post_order(root,s,solution);
+    root = post_order(root, s, solution);
     if (root != nullptr) solution.push_back(root);
     return solution;
 }

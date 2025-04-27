@@ -20,14 +20,13 @@
  *
  *
  */
- 
- #include <iostream>
- #include <set>
- #include <string>
- #include <vector>
- #include <map>
- #include <numeric>
- #include <algorithm>
- 
- int main(int argc, char** argv) { return 0; }
-    
+
+#include <iostream>
+#include <set>
+#include <string>
+#include <vector>
+#include <map>
+#include <numeric>
+#include <algorithm>
+
+int main(int argc, char** argv) { return 0; }

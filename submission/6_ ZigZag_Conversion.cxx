@@ -63,7 +63,8 @@ std::string convert(std::string s, int numRows) {
     std::vector<std::string> temp(numRows, std::string{});
     int index{0};
     int increment = 1;
-    for (char& c : s) {;
+    for (char& c : s) {
+        ;
         temp[index].push_back(c);
         index += increment;
         increment = (index == numRows - 1) ? -1 : index == 0 ? 1 : increment;

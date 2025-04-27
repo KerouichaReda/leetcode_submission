@@ -29,8 +29,7 @@ bool isValid(std::string& s) {
     for (char& c : s) {
         if (c == '(' || c == '[' || c == '{') {
             stack.push_back(c);
-        } else if (!stack.empty() &&
-                   (c == (stack.back() + 1) || c == stack.back() + 2)) {
+        } else if (!stack.empty() && (c == (stack.back() + 1) || c == stack.back() + 2)) {
             stack.pop_back();
         } else {
             return false;

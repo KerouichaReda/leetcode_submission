@@ -44,10 +44,8 @@ bool wordPattern(std::string pattern, std::string s) {
     std::unordered_map<char, std::string> m1;
     std::unordered_map<std::string, char> m2;
     for (std::size_t index = 0, size = pattern.size(); index < size; index++) {
-        if (m1.count(pattern[index]) && m1[pattern[index]] != tokens[index])
-            return false;
-        if (m2.count(tokens[index]) && m2[tokens[index]] != pattern[index])
-            return false;
+        if (m1.count(pattern[index]) && m1[pattern[index]] != tokens[index]) return false;
+        if (m2.count(tokens[index]) && m2[tokens[index]] != pattern[index]) return false;
         m1[pattern[index]] = tokens[index];
         m2[tokens[index]] = pattern[index];
     }

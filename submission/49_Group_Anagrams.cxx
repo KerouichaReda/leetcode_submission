@@ -4,8 +4,7 @@
 #include <unordered_map>
 #include <algorithm>
 
-std::vector<std::vector<std::string>> groupAnagrams(
-    std::vector<std::string>& strs) {
+std::vector<std::vector<std::string>> groupAnagrams(std::vector<std::string>& strs) {
     std::unordered_map<std::string, unsigned short> m;
     std::vector<std::vector<std::string>> solution;
 

@@ -11,8 +11,7 @@ struct temp {
 };
 int averageOfSubtree(TreeNode* root) { return helper(root).solution; }
 temp helper(TreeNode* root) {
-    return root == nullptr ? temp() : temp(helper(root->left),
-                                           helper(root->right), root->val);
+    return root == nullptr ? temp() : temp(helper(root->left), helper(root->right), root->val);
 }
 
 int main(int argc, char const* argv[]) {

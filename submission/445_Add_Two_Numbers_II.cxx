@@ -23,7 +23,6 @@
 
 #include <iostream>
 
-
 #include "listnode.hpp"
 
 ListNode* reverse(ListNode* head) {

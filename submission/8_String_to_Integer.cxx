@@ -2,7 +2,6 @@
 #include <functional>
 #include <iostream>
 
-
 int myAtoi(std::string s) {
     std::reverse(s.begin(), s.end());
     while (!s.empty() && s.back() == ' ') s.pop_back();
@@ -13,8 +12,7 @@ int myAtoi(std::string s) {
     }
     int solution{0};
     while (!s.empty() && isdigit(s.back())) {
-        if (solution > INT_MAX / 10 ||
-            solution == INT_MAX / 10 && (s.back() > '7')) {
+        if (solution > INT_MAX / 10 || solution == INT_MAX / 10 && (s.back() > '7')) {
             return sign < 0 ? INT_MIN : INT_MAX;
         }
         solution = solution * 10 + (s.back() - '0');
@@ -23,10 +21,7 @@ int myAtoi(std::string s) {
     return solution * sign;
 }
 
-
-
-int main(int argc, char const *argv[])
-{
+int main(int argc, char const* argv[]) {
     /* code */
     return 0;
 }

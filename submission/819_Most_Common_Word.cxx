@@ -4,8 +4,7 @@
 #include <unordered_map>
 #include <unordered_set>
 #include <string>
-std::string mostCommonWord(std::string paragraph,
-                           std::vector<std::string>& banned) {
+std::string mostCommonWord(std::string paragraph, std::vector<std::string>& banned) {
     const std::string delimiter = " !?',;.";
     const std::unordered_set<char> del(delimiter.begin(), delimiter.end());
     paragraph.push_back(' ');
@@ -15,8 +14,7 @@ std::string mostCommonWord(std::string paragraph,
     std::pair<std::string, int> solution = {std::string{}, 0};
     for (char& c : paragraph) {
         if (del.count(c)) {
-            if (!temp.empty() && !set_banned.count(temp) &&
-                ++m_[temp] > solution.second) {
+            if (!temp.empty() && !set_banned.count(temp) && ++m_[temp] > solution.second) {
                 solution.first = temp;
                 solution.second = m_[temp];
             }

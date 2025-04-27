@@ -9,9 +9,8 @@
 #include <algorithm>
 int largestPerimeter(std::vector<int>& nums) {
     std::sort(nums.begin(), nums.end(), std::greater());
-    for (size_t i = 0 , size = nums.size() - 2; i < size; ++i)
-    {
-        if(nums[i] < (nums[i + 1] + nums[i + 2])){
+    for (size_t i = 0, size = nums.size() - 2; i < size; ++i) {
+        if (nums[i] < (nums[i + 1] + nums[i + 2])) {
             return nums[i] + nums[i + 1] + nums[i + 2];
         }
     }

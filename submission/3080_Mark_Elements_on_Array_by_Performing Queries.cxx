@@ -4,8 +4,7 @@
 #include <algorithm>
 #include <numeric>
 
-std::vector<long long> unmarkedSumArray(
-    std::vector<int>& nums, std::vector<std::vector<int>>& queries) {
+std::vector<long long> unmarkedSumArray(std::vector<int>& nums, std::vector<std::vector<int>>& queries) {
     std::map<int, std::vector<int>> m;
     std::set<int> marked;
     std::int64_t sum{0};

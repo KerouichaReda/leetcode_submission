@@ -9,7 +9,6 @@ std::string largestOddNumber(std::string num) {
 }
 
 int main(int argc, char const* argv[]) {
-    std::cout << largestOddNumber("100000000000000000000000001000")
-              << std::endl;
+    std::cout << largestOddNumber("100000000000000000000000001000") << std::endl;
     return 0;
 }

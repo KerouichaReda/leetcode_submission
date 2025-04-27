@@ -5,9 +5,7 @@
 int hIndex(std::vector<int>& citations) {
     std::sort(citations.rbegin(), citations.rend());
     int solution;
-    for (solution = 0;
-         solution < citations.size() && solution < citations[solution];
-         solution++) {
+    for (solution = 0; solution < citations.size() && solution < citations[solution]; solution++) {
     }
     return solution;
 }

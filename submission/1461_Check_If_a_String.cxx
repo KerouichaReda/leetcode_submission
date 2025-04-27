@@ -9,8 +9,7 @@ bool hasAllCodes(std::string s, int k) {
     int mask = power - 1;  // OxFF to only keep k bits
     std::vector<bool> m(power, false);
     for (int i = k - 1, temp, size = s.size(); i < size; ++i) {
-        temp = i == k - 1 ? std::stoi(s.substr(0, k), nullptr, 2)
-                          : ((temp << 1) & mask) + (s[i] - '0');
+        temp = i == k - 1 ? std::stoi(s.substr(0, k), nullptr, 2) : ((temp << 1) & mask) + (s[i] - '0');
         m[temp] = true;
     }
     return std::all_of(m.begin(), m.end(), [](bool e) { return e; });

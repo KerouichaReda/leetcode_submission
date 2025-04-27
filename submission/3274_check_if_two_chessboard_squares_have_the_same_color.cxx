@@ -20,20 +20,20 @@
  *
  *
  */
- 
- #include <iostream>
- #include <set>
- #include <string>
- #include <vector>
- #include <map>
- #include <numeric>
- #include <algorithm>
 
- bool checkTwoChessboards(std::string a, std::string b) {
-    return ((a[1] - '1'  + a[0] - 'a') &  1)  == ((b[1] - '1'  + b[0] - 'a')  & 1 );        
+#include <iostream>
+#include <set>
+#include <string>
+#include <vector>
+#include <map>
+#include <numeric>
+#include <algorithm>
+
+bool checkTwoChessboards(std::string a, std::string b) {
+    return ((a[1] - '1' + a[0] - 'a') & 1) == ((b[1] - '1' + b[0] - 'a') & 1);
 }
- 
- int main(int argc, char** argv) { 
+
+int main(int argc, char** argv) {
     std::cout << checkTwoChessboards("a8", "c8") << std::endl;
-    return 0; }
-    
+    return 0;
+}

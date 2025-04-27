@@ -22,11 +22,9 @@ bool isToeplitzMatrix(std::vector<std::vector<int>>& matrix) {
     return true;
 }
 
-
 ///< optimal solution
 bool isToeplitzMatrix(std::vector<std::vector<int>>& matrix) {
-    for (int i = 0, row = matrix.size() - 1, col = matrix[0].size() - 1;
-         i < row; i++) {
+    for (int i = 0, row = matrix.size() - 1, col = matrix[0].size() - 1; i < row; i++) {
         for (int j = 0; j < col; j++) {
             if (matrix[i][j] != matrix[i + 1][j + 1]) return false;
         }
@@ -35,7 +33,6 @@ bool isToeplitzMatrix(std::vector<std::vector<int>>& matrix) {
 }
 
 int main(int argc, char const* argv{}) {
-    std::vector<std::vector<int>> matrix = {{1,2,3,4},{5,1,2,3},{9,5,1,2}};
-    std
-    return EXIT_SUCCESS;
+    std::vector<std::vector<int>> matrix = {{1, 2, 3, 4}, {5, 1, 2, 3}, {9, 5, 1, 2}};
+    std return EXIT_SUCCESS;
 }
