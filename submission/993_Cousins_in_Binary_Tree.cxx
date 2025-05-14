@@ -22,22 +22,25 @@
  */
 
 #include <iostream>
+#include "treenode.hpp"
 
-bool isCousins(TreeNode* root, int x, int y) {
-    pair<int, int> x_level = height(root, 0, x, 0);
-    pair<int, int> y_level = height(root, 0, y, 0);
-    return x_level.first == y_level.first && x_level.second != y_level.second;
-}
-pair<int, int> height(TreeNode* root, int parent, int val, int level) {
+
+std::pair<int, int> height(TreeNode* root, int parent, int val, int level) {
     if (root == nullptr) {
-        return make_pair(-1, parent);
+        return std::make_pair(-1, parent);
     }
     if (root->val == val) {
-        return make_pair(level, parent);
+        return std::make_pair(level, parent);
     }
-    pair<int, int> left = height(root->left, root->val, val, level + 1);
-    pair<int, int> right = height(root->right, root->val, val, level + 1);
+    std::pair<int, int> left = height(root->left, root->val, val, level + 1);
+    std::pair<int, int> right = height(root->right, root->val, val, level + 1);
     return (left.first >= 0) ? left : right;
+}
+
+bool isCousins(TreeNode* root, int x, int y) {
+    std::pair<int, int> x_level = height(root, 0, x, 0);
+    std::pair<int, int> y_level = height(root, 0, y, 0);
+    return x_level.first == y_level.first && x_level.second != y_level.second;
 }
 
 int main(int argc, char** argv) { return 0; }
