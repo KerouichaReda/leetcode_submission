@@ -1,5 +1,5 @@
 /*
- * 1295_find_numbers_with_even_number_of_digits.cxx
+ * 1523_count_odd_numbers_in_an_interval_range.cxx
  *
  * Copyright 2025 - present RedaKerouicha <reda_kerouicha@outlook.com>
  *
@@ -29,13 +29,9 @@
 #include <numeric>
 #include <algorithm>
 
-int findNumbers(std::vector<int>& nums) {
-    return std::accumulate(nums.begin(), nums.end(), 0, [](int sum, int e) {
-        int len{};
-        for (; e; len++, e /= 10)
-            ;
-        return sum + !(len & 1);
-    });
-}
+int countOdds(int low, int high) { return (high - low) / 2 + (low & 1 || high & 1); }
 
-int main(int argc, char** argv) { return 0; }
+int main(int argc, char** argv) {
+    std::cout << countOdds(1, 2) << std::endl;
+    0;
+}
