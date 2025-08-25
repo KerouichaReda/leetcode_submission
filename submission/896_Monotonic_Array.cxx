@@ -1,20 +1,42 @@
-#include <vector>
+/*
+ * 896_monotonic_array.cxx
+ *
+ * Copyright 2025 - present RedaKerouicha <reda_kerouicha@outlook.com>
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301, USA.
+ *
+ *
+ */
+ 
+ #include <iostream>
+ #include <set>
+ #include <string>
+ #include <vector>
+ #include <map>
+ #include <numeric>
+ #include <algorithm>
 
-bool isMonotonic(std::vector<int>& nums) {
-    auto sgn = [](int e) { return e > 0 ? 1 : e < 0 ? -1 : 0; };
-    int dir = 0;
-    int pre = *nums.begin();
-    for (int e : nums) {
-        int div = sgn(e - pre);
-        pre = e;
-        if (!div) continue;
-        if (dir && div != dir) return false;
-        dir = div;
+     bool isMonotonic(std::vector<int>& nums) {        
+        bool inc {true} , dec{true};
+        for(int i = 0, size = nums.size() - 1; i < size ; i++ ){
+            inc &= nums[i] <= nums[i+1];
+            dec &= nums[i] >= nums[i+1];
+        } 
+        return inc || dec;
     }
-    return true;
-}
-
-int main(int argc, char const* argv[]) {
-    std::vector<int> nums{1, 2, 2, 4};
-    return 0;
-}
+ 
+ int main(int argc, char** argv) { return 0; }
+    
