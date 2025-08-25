@@ -31,19 +31,12 @@ struct TreeNode {
     TreeNode(int x, TreeNode* left, TreeNode* right) : val(x), left(left), right(right) {}
 };
 
-bool isBalanced(TreeNode* root) {
-    if (root != nullptr) {
-        return isBalanced(root->left) and isBalanced(root->right) and
-               std::abs(getHeight(root->left) - getHeight(root->right)) <= 1;
-    }
-    return true;
+int height(TreeNode* root, int level = 0) {
+    return root == nullptr ? level : std::max(height(root->left, level + 1), height(root->right, level + 1));
 }
-
-int getHeight(TreeNode* root) {
-    if (root != nullptr) {
-        return 1 + std::max(getHeight(root->left), getHeight(root->right));
-    }
-    return 0;
+bool isBalanced(TreeNode* root) {
+    return root == nullptr ? true : isBalanced(root->left) && isBalanced(root->right) &&
+                                        (std::abs(height(root->right) - height(root->left)) <= 1);
 }
 
 int main(int argc, char** argv) { return 0; }
