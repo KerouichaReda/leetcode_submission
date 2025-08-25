@@ -3,14 +3,13 @@
 #include <algorithm>
 
 int nearestValidPoint(int x, int y, std::vector<std::vector<int>>& points) {
-    int solution{-1}, max_dist{INT32_MAX};
+    int solution = -1;
+    int dist = INT_MAX;
     for (int i = 0, size = points.size(); i < size; i++) {
-        if (points[i][0] == x || points[i][1] == y) {
-            int manhattan_dist = std::abs(points[i][0] - x) + std::abs(points[i][1] - y);
-            if (manhattan_dist < max_dist) {
-                max_dist = manhattan_dist;
-                solution = i;
-            }
+        if ((points[i][0] == x || points[i][1] == y) &&
+            (std::abs(points[i][0] - x) + std::abs(points[i][1] - y)) < dist) {
+            solution = i;
+            dist = (std::abs(points[i][0] - x) + std::abs(points[i][1] - y));
         }
     }
     return solution;
